@@ -21,6 +21,29 @@ public class ComponentsController : Controller
     [HttpGet("{**url}")]
     public IActionResult Index(string url)
     {
-        return Json($"{url}");
+        try
+        {
+            var provider = _componentsMappingService.GetProviderForUrl(url);
+
+            if (provider == null)
+            {
+                _logger.LogInformation($"no component provider found for url '{url}'");
+                return BadRequest();
+            }
+
+            _logger.LogInformation($"component provider found : {provider.Id}");
+
+            var result = provider.GetContentForUrl(url);
+            if (result.Content == null)
+            {
+                return Ok();
+            }
+
+            return File(result.Content, result.ContentType);
+        }
+        catch (Exception ex)
+        {
+            return new StatusCodeResult(404);
+        }
     }
 }
