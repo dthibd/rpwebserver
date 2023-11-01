@@ -1,7 +1,10 @@
 using System.Reflection;
 using AutoMapper;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
 using WebComponentServer.AutoMapping;
+using WebComponentServer.Configuration;
+using WebComponentServer.Services;
 using WebComponentServer.Services.ReverseProxy;
 using Yarp.ReverseProxy.Configuration;
 
@@ -16,6 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
+    .AddSingleton<IComponentsMappingService, ComponentsMappingService>()
     .AddSingleton<IReverseProxyChangesMonitor, ReverseProxyChangesMonitor>()
     .AddSingleton<IRoutesConfigProvider, RoutesConfigProvider>()
     .AddSingleton<IClustersConfigProvider, ClustersConfigProvider>()
@@ -29,6 +33,11 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("*");
     });
 });
+
+builder.Services.AddOptions<WebComponentsServerOptions>()
+    .Bind(builder.Configuration.GetSection("WebComponentsServer"));
+
+builder.Logging.AddConsole();
 
 var app = builder.Build();
 
@@ -47,6 +56,9 @@ app.UseAuthorization();
 app.UseCors();
 
 app.MapControllers();
+
+
+var wcOptions = app.Services.GetService<IOptions<WebComponentsServerOptions>>();
 
 
 app.UseFileServer(new FileServerOptions

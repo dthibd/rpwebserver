@@ -1,0 +1,7 @@
+namespace WebComponentServer.Configuration;
+
+public sealed class FileProviderOptions
+{
+    public string FilePath { get; set; }
+    public string BaseUrl { get; set; }
+}
