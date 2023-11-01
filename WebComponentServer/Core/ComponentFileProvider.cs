@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.RegularExpressions;
+using MimeTypes;
 
 namespace WebComponentServer.Core;
 
@@ -38,13 +39,15 @@ public class ComponentFileProvider : IComponentProvider
         }
 
         var path = Path.Combine(SourcePath, match.Groups[1].Value);
+        var ext = Path.GetExtension(path);
+        var mimeType = MimeTypeMap.GetMimeType(ext);
         
         var stream = File.OpenRead(path);
 
         return new ProviderContentResult()
         {
             Content = stream,
-            ContentType = "text/plain"
+            ContentType = mimeType
         };
     }
 }
