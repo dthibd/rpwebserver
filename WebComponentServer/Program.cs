@@ -1,3 +1,4 @@
+using System.IO.Abstractions;
 using System.Reflection;
 using AutoMapper;
 using Microsoft.Extensions.FileProviders;
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
+builder.Services.AddTransient<IFileSystem, FileSystem>();
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(RouteConfigProfile)));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RouteConfigProfile).Assembly));
 builder.Services.AddControllers();
@@ -19,6 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
+    .AddSingleton<IComponentProviderFactory, ComponentProviderFactory>()
     .AddSingleton<IComponentsMappingService, ComponentsMappingService>()
     .AddSingleton<IReverseProxyChangesMonitor, ReverseProxyChangesMonitor>()
     .AddSingleton<IRoutesConfigProvider, RoutesConfigProvider>()

@@ -9,14 +9,17 @@ public class ComponentsMappingService : IComponentsMappingService
 {
     private ILogger<ComponentsMappingService> _logger;
     private IOptions<WebComponentsServerOptions> _webComponentsServerOptions;
+    private IComponentProviderFactory _providerFactory;
 
     private Dictionary<string, IComponentProvider> _providers = new Dictionary<string, IComponentProvider>();
 
     public ComponentsMappingService(
         ILogger<ComponentsMappingService> logger,
+        IComponentProviderFactory providerFactory,
         IOptions<WebComponentsServerOptions> options)
     {
         _logger = logger;
+        _providerFactory = providerFactory;
         _webComponentsServerOptions = options;
 
         CreateMapping();
@@ -30,9 +33,6 @@ public class ComponentsMappingService : IComponentsMappingService
         return provider;
     }
 
-    
-    
-    
 
     private void CreateMapping()
     {
@@ -60,7 +60,7 @@ public class ComponentsMappingService : IComponentsMappingService
                     {
                         _logger.LogInformation($"Adding provider for {entry.Key} with base url '{baseUrl}' to path '{path}' ");
 
-                        var provider = new ComponentFileProvider(entry.Key, baseUrl, path);
+                        var provider = _providerFactory.CreateFileProvider(entry.Key, baseUrl, path);
                         _providers.Add(entry.Key, provider);
                     }
                     else

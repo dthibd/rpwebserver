@@ -9,6 +9,7 @@ public struct ProviderContentResult
 public interface IComponentProvider
 {
     string Id { get; }
+    string BaseUrl { get; }
     bool MatchUrl(string url);
     ProviderContentResult GetContentForUrl(string url);
 }

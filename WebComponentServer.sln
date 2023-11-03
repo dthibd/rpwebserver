@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebComponentServer", "WebComponentServer\WebComponentServer.csproj", "{7B6A8BED-6E6E-491E-92D3-30A1E61E79B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebComponentServerTest", "WebComponentServerTest\WebComponentServerTest.csproj", "{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{7B6A8BED-6E6E-491E-92D3-30A1E61E79B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B6A8BED-6E6E-491E-92D3-30A1E61E79B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B6A8BED-6E6E-491E-92D3-30A1E61E79B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

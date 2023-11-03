@@ -1,3 +1,4 @@
+using System.IO.Abstractions;
 using System.Text;
 using System.Text.RegularExpressions;
 using MimeTypes;
@@ -10,18 +11,21 @@ public class ComponentFileProvider : IComponentProvider
     public string BaseUrl { get; }
     public string SourcePath { get; }
     
-    public ComponentFileProvider(string id, string baseUrl, string sourcePath)
+    public IFileSystem FileSystem { get; }
+    
+    public ComponentFileProvider(IFileSystem fileSystem, string id, string baseUrl, string sourcePath)
     {
-        Id = id;
         BaseUrl = baseUrl;
+        Id = id;
         SourcePath = sourcePath;
+        FileSystem = fileSystem;
 
         if (!BaseUrl.EndsWith("/"))
         {
             BaseUrl += "/";
         }
     }
-
+    
     public bool MatchUrl(string url)
     {
         return url.StartsWith(BaseUrl, StringComparison.InvariantCultureIgnoreCase);
@@ -42,7 +46,7 @@ public class ComponentFileProvider : IComponentProvider
         var ext = Path.GetExtension(path);
         var mimeType = MimeTypeMap.GetMimeType(ext);
         
-        var stream = File.OpenRead(path);
+        var stream = FileSystem.File.OpenRead(path);
 
         return new ProviderContentResult()
         {
