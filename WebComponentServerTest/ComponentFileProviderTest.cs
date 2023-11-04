@@ -97,5 +97,6 @@ public class ComponentFileProviderTest
         var result = provider.GetContentForUrl("path/main.js");
 
         Assert.NotNull(result.Content);
+        Assert.Equal("application/javascript", result.ContentType);
     }
 }

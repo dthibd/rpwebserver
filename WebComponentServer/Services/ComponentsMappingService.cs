@@ -37,38 +37,50 @@ public class ComponentsMappingService : IComponentsMappingService
     private void CreateMapping()
     {
         var webComponents = _webComponentsServerOptions.Value?.WebComponents;
-        if (webComponents != null)
+
+        if (webComponents == null)
         {
-            var currentDir = Directory.GetCurrentDirectory();
-            var rootDir = _webComponentsServerOptions.Value?.Root;
+            _logger.LogInformation("No web components found in settings");
+            return;
+        }
+        
+        var currentDir = Directory.GetCurrentDirectory();
+        var rootDir = _webComponentsServerOptions.Value?.Root;
 
-            if (!string.IsNullOrEmpty(rootDir))
+        if (!string.IsNullOrEmpty(rootDir))
+        {
+            currentDir = Path.Combine(currentDir, rootDir);
+        }
+        
+        foreach (var entry in webComponents)
+        {
+            var provider = CreateProviderForPath(entry.Key, currentDir, entry.Value?.FileProvider);
+            if (provider != null)
             {
-                currentDir = Path.Combine(currentDir, rootDir);
-            }
-            
-            foreach (var entry in webComponents)
-            {
-                var fileProviderOptions = entry.Value?.FileProvider;
-                if (fileProviderOptions != null)
-                {
-                    var path = Path.Combine(currentDir, fileProviderOptions.FilePath);
-                    var pathExists = Directory.Exists(path);
-                    var baseUrl = fileProviderOptions.BaseUrl;
-
-                    if (pathExists)
-                    {
-                        _logger.LogInformation($"Adding provider for {entry.Key} with base url '{baseUrl}' to path '{path}' ");
-
-                        var provider = _providerFactory.CreateFileProvider(entry.Key, baseUrl, path);
-                        _providers.Add(entry.Key, provider);
-                    }
-                    else
-                    {
-                        _logger.LogInformation($"path '{path}' doesn't exists : provider {entry.Key} not created");
-                    }
-                }
+                _providers.Add(entry.Key, provider);
             }
         }
+    }
+
+    private IComponentProvider? CreateProviderForPath(string key, string currentDir, FileProviderOptions? fileProviderOptions)
+    {
+        if (fileProviderOptions == null)
+        {
+            _logger.LogInformation($"no file provider options for {key}");
+            return null;
+        }
+        
+        var path = Path.Combine(currentDir, fileProviderOptions.FilePath);
+        var pathExists = Directory.Exists(path);
+        var baseUrl = fileProviderOptions.BaseUrl;
+
+        if (pathExists)
+        {
+            _logger.LogInformation($"Adding provider for {key} with base url '{baseUrl}' to path '{path}' ");
+            return _providerFactory.CreateFileProvider(key, baseUrl, path);
+        }
+
+        _logger.LogInformation($"path '{path}' doesn't exists : provider {key} not created");
+        return null;
     }
 }
