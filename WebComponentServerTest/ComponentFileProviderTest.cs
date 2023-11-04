@@ -1,17 +1,11 @@
 using System.IO.Abstractions;
 using Microsoft.Win32.SafeHandles;
 using Moq;
-using WebComponentServer.Core;
 using WebComponentServer.Services;
+using WebComponentServerTest.Utilities;
 
 namespace WebComponentServerTest;
 
-public class TestFileStream : FileSystemStream
-{
-    public TestFileStream(Stream stream, string path, bool isAsync) : base(stream, path, isAsync)
-    {
-    }
-}
 
 public class ComponentFileProviderTest
 {
