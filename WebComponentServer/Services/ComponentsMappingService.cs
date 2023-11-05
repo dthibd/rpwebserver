@@ -10,7 +10,7 @@ public class ComponentsMappingService : IComponentsMappingService
     public ILogger<ComponentsMappingService> Logger { get; }
     public IOptions<WebComponentsServerOptions> WebComponentsServerOptions { get; }
     public IComponentProviderFactory ProviderFactory { get; }
-    private Dictionary<string, IComponentProvider> Providers { get; } = new Dictionary<string, IComponentProvider>();
+    public Dictionary<string, IComponentProvider> Providers { get; } = new Dictionary<string, IComponentProvider>();
 
     public ComponentsMappingService(
         ILogger<ComponentsMappingService> logger,
@@ -20,8 +20,6 @@ public class ComponentsMappingService : IComponentsMappingService
         Logger = logger;
         ProviderFactory = providerFactory;
         WebComponentsServerOptions = options;
-
-        CreateMapping();
     }
 
     public IComponentProvider? GetProviderForUrl(string url)
@@ -33,13 +31,13 @@ public class ComponentsMappingService : IComponentsMappingService
     }
 
 
-    public void CreateMapping()
+    public void UpdateMapping()
     {
         var webComponents = WebComponentsServerOptions.Value?.WebComponents;
 
         if (webComponents == null)
         {
-            Logger.LogInformation("No web components found in settings");
+            Logger.LogInformation("No web components structure found in settings");
             return;
         }
         
@@ -50,6 +48,8 @@ public class ComponentsMappingService : IComponentsMappingService
         {
             currentDir = Path.Combine(currentDir, rootDir);
         }
+
+        Providers.Clear();
         
         foreach (var entry in webComponents)
         {

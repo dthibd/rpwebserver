@@ -1,8 +1,5 @@
 using System.IO.Abstractions;
 using System.Reflection;
-using AutoMapper;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Options;
 using WebComponentServer.AutoMapping;
 using WebComponentServer.Configuration;
 using WebComponentServer.Services;
@@ -61,44 +58,12 @@ app.UseCors();
 app.MapControllers();
 
 
-var wcOptions = app.Services.GetService<IOptions<WebComponentsServerOptions>>();
+//
+// Update providers mapping
+//
+var componentsMappingService = app.Services.GetService<IComponentsMappingService>();
+componentsMappingService?.UpdateMapping();
 
-
-app.UseFileServer(new FileServerOptions
-{
-    FileProvider =
-        new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(),
-                "../../Components/Vanilla/Web-Components/dist")),
-    RequestPath = "/vanilla",
-});
-
-app.UseFileServer(new FileServerOptions
-{
-    FileProvider =
-        new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(),
-            "../../Components/React/Web-Components/dist")),
-    RequestPath = "/react"
-});
-
-app.UseFileServer(new FileServerOptions
-{
-    FileProvider =
-        new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(),
-                "../../Components/Angular/Web-Components/dist/web-component")),
-    RequestPath = "/angular"
-});
-
-app.UseFileServer(new FileServerOptions
-{
-    FileProvider =
-        new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(),
-                "../../Apps/appdemo1/dist")),
-    RequestPath = "/appdemo1"
-});
 
 app.Run();
 
