@@ -48,7 +48,7 @@ public class ComponentsMappingService : IComponentsMappingService
         var currentDir = FileSystem.Directory.GetCurrentDirectory();
         var rootDir = WebComponentsServerOptions.Value?.Root;
 
-        if (!string.IsNullOrEmpty(rootDir))
+        if (!string.IsNullOrEmpty(rootDir) && !FileSystem.Path.IsPathRooted(rootDir))
         {
             currentDir = FileSystem.Path.Combine(currentDir, rootDir);
         }

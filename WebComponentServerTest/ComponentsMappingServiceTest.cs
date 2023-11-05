@@ -22,7 +22,8 @@ public class ComponentsMappingServiceTest
     private string[] FilePaths { get; } = { "some/file/path", "some/other/file/path" };
     private string[] ProviderIds { get; } = {"TestA", "TestB"};
     private string[] ProviderValidUrls { get; } = {"testA/url/module/main.js", "testB/file/module/main.jsx"};
-    private string[] ProviderInvalidUrls { get; } = {"some/invalid/url/main.js", "some/other/invalid/url/main.ico"}; 
+    private string[] ProviderInvalidUrls { get; } = {"some/invalid/url/main.js", "some/other/invalid/url/main.ico"};
+    private string ServerRootDir { get; }= "root/folder/";
 
     public ComponentsMappingServiceTest()
     {
@@ -55,7 +56,7 @@ public class ComponentsMappingServiceTest
 
         WebComponentsServerOptions = Options.Create<WebComponentsServerOptions>(new WebComponentsServerOptions()
         {
-            Root = "root/folder/",
+            Root = ServerRootDir,
             WebComponents = new Dictionary<string, WebComponentOptions>()
             {
                 { ProviderIds[0], WebComponentOptions[0].Value },
@@ -298,5 +299,68 @@ public class ComponentsMappingServiceTest
         var provider = service.CreateProviderForPath(ProviderIds[0], currentDirectory, null);
 
         Assert.Null(provider);
+    }
+
+    [Fact]
+    public void UpdateMappingWebComponentsNull()
+    {
+        WebComponentsServerOptions.Value.WebComponents = null;
+
+        var providerMock = ComponentProviderMocks[0].Object;
+        
+        var service = new ComponentsMappingService(LoggerMock.Object, ComponentProviderFactoryMock.Object, FileSystemMock.Object, WebComponentsServerOptions);
+        service.Providers.Add(providerMock.Id, providerMock);
+
+        service.UpdateMapping();
+
+        // items shouldn't be cleared
+        Assert.Single(service.Providers);
+    }
+
+    [Fact]
+    public void UpdateMappingRootDirNotRooted()
+    {
+        var currentDir = "/etc/home";
+        var rootDir = ServerRootDir;
+        var combinedDir = $"{currentDir}/{rootDir}";
+        var providerMock = ComponentProviderMocks[0].Object;
+
+        var directoryMock = new Mock<IDirectory>();
+        directoryMock
+            .Setup(it => it.GetCurrentDirectory())
+            .Returns(currentDir);
+        directoryMock
+            .Setup(it => it.Exists(It.IsAny<string>()))
+            .Returns(true);
+
+        var pathMock = new Mock<IPath>();
+        pathMock
+            .Setup(it => it.Combine(currentDir, rootDir))
+            .Returns(combinedDir);
+        pathMock
+            .Setup(it => it.IsPathRooted(rootDir))
+            .Returns(false);
+
+        FileSystemMock
+            .SetupGet(it => it.Directory)
+            .Returns(directoryMock.Object);
+
+        FileSystemMock
+            .SetupGet(it => it.Path)
+            .Returns(pathMock.Object);
+
+        ComponentProviderFactoryMock
+            .Setup(it => it.CreateFileProvider(ProviderIds[0], BaseUrls[0], It.IsAny<string>()))
+            .Returns(ComponentProviderMocks[0].Object);
+        ComponentProviderFactoryMock
+            .Setup(it => it.CreateFileProvider(ProviderIds[1], BaseUrls[1], It.IsAny<string>()))
+            .Returns(ComponentProviderMocks[1].Object);
+        
+        var service = new ComponentsMappingService(LoggerMock.Object, ComponentProviderFactoryMock.Object, FileSystemMock.Object, WebComponentsServerOptions);
+        service.Providers.Add(providerMock.Id, providerMock);
+        
+        service.UpdateMapping();
+
+        Assert.Equal(2, service.Providers.Count);
     }
 }
