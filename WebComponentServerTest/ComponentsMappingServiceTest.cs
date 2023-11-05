@@ -134,6 +134,20 @@ public class ComponentsMappingServiceTest
     }
 
     [Fact]
+    public void GetProviderForValidUrlWithSecondProviderTaken()
+    {
+        var service = new ComponentsMappingService(LoggerMock.Object, ComponentProviderFactoryMock.Object, FileSystemMock.Object, WebComponentsServerOptions);
+
+        service.Providers.Add(ProviderIds[0], ComponentProviderMocks[0].Object);
+        service.Providers.Add(ProviderIds[1], ComponentProviderMocks[1].Object);
+        
+        var provider = service.GetProviderForUrl(ProviderValidUrls[1]);
+
+        Assert.NotNull(provider);
+        Assert.Equal(ProviderIds[1], provider.Id);
+    }
+
+    [Fact]
     public void GetProviderForInvalidUrl()
     {
         var service = new ComponentsMappingService(LoggerMock.Object, ComponentProviderFactoryMock.Object, FileSystemMock.Object, WebComponentsServerOptions);
