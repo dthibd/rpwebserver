@@ -1,3 +1,4 @@
+using System.IO.Abstractions;
 using Microsoft.Extensions.Options;
 using WebComponentServer.Configuration;
 using WebComponentServer.Core;
@@ -10,15 +11,18 @@ public class ComponentsMappingService : IComponentsMappingService
     public ILogger<ComponentsMappingService> Logger { get; }
     public IOptions<WebComponentsServerOptions> WebComponentsServerOptions { get; }
     public IComponentProviderFactory ProviderFactory { get; }
+    public IFileSystem FileSystem { get; }
     public Dictionary<string, IComponentProvider> Providers { get; } = new Dictionary<string, IComponentProvider>();
 
     public ComponentsMappingService(
         ILogger<ComponentsMappingService> logger,
         IComponentProviderFactory providerFactory,
+        IFileSystem fileSystem,
         IOptions<WebComponentsServerOptions> options)
     {
         Logger = logger;
         ProviderFactory = providerFactory;
+        FileSystem = fileSystem;
         WebComponentsServerOptions = options;
     }
 
@@ -41,12 +45,12 @@ public class ComponentsMappingService : IComponentsMappingService
             return;
         }
         
-        var currentDir = Directory.GetCurrentDirectory();
+        var currentDir = FileSystem.Directory.GetCurrentDirectory();
         var rootDir = WebComponentsServerOptions.Value?.Root;
 
         if (!string.IsNullOrEmpty(rootDir))
         {
-            currentDir = Path.Combine(currentDir, rootDir);
+            currentDir = FileSystem.Path.Combine(currentDir, rootDir);
         }
 
         Providers.Clear();
@@ -69,8 +73,8 @@ public class ComponentsMappingService : IComponentsMappingService
             return null;
         }
         
-        var path = Path.Combine(currentDir, fileProviderOptions.FilePath);
-        var pathExists = Directory.Exists(path);
+        var path = FileSystem.Path.IsPathRooted(fileProviderOptions.FilePath) ? fileProviderOptions.FilePath : FileSystem.Path.Combine(currentDir, fileProviderOptions.FilePath);
+        var pathExists = FileSystem.Directory.Exists(path);
         var baseUrl = fileProviderOptions.BaseUrl;
 
         if (pathExists)
