@@ -363,4 +363,54 @@ public class ComponentsMappingServiceTest
 
         Assert.Equal(2, service.Providers.Count);
     }
+    
+    [Fact]
+    public void UpdateMappingRootDirNull()
+    {
+        var currentDir = "/etc/home";
+        var rootDir = ServerRootDir;
+        var combinedDir = $"{currentDir}/{rootDir}";
+        var providerMock = ComponentProviderMocks[0].Object;
+
+        var directoryMock = new Mock<IDirectory>();
+        directoryMock
+            .Setup(it => it.GetCurrentDirectory())
+            .Returns(currentDir);
+        directoryMock
+            .Setup(it => it.Exists(It.IsAny<string>()))
+            .Returns(true);
+
+        var pathMock = new Mock<IPath>();
+        pathMock
+            .Setup(it => it.Combine(currentDir, rootDir))
+            .Returns(combinedDir);
+        pathMock
+            .Setup(it => it.IsPathRooted(rootDir))
+            .Returns(false);
+
+        FileSystemMock
+            .SetupGet(it => it.Directory)
+            .Returns(directoryMock.Object);
+
+        FileSystemMock
+            .SetupGet(it => it.Path)
+            .Returns(pathMock.Object);
+
+        ComponentProviderFactoryMock
+            .Setup(it => it.CreateFileProvider(ProviderIds[0], BaseUrls[0], It.IsAny<string>()))
+            .Returns(ComponentProviderMocks[0].Object);
+        ComponentProviderFactoryMock
+            .Setup(it => it.CreateFileProvider(ProviderIds[1], BaseUrls[1], It.IsAny<string>()))
+            .Returns(ComponentProviderMocks[1].Object);
+
+        WebComponentsServerOptions.Value.Root = null;
+        
+        var service = new ComponentsMappingService(LoggerMock.Object, ComponentProviderFactoryMock.Object, FileSystemMock.Object, WebComponentsServerOptions);
+        service.Providers.Add(providerMock.Id, providerMock);
+        
+        service.UpdateMapping();
+
+        Assert.Equal(2, service.Providers.Count);
+        pathMock.Verify(it => it.Combine(currentDir, rootDir), Times.Never);
+    }
 }
