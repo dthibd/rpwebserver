@@ -23,7 +23,7 @@ public class MutableRouteConfig
 
     public MutableRouteTransforms Transforms { get; set; } = new MutableRouteTransforms();
     
-    public RouteConfig ToRouteConfig()
+    public virtual RouteConfig ToRouteConfig()
     {
         return new RouteConfig
         {

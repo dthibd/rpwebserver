@@ -4,7 +4,7 @@ using Moq;
 using WebComponentServer.Services;
 using WebComponentServerTest.Utilities;
 
-namespace WebComponentServerTest;
+namespace WebComponentServerTest.Services;
 
 
 public class ComponentFileProviderTest

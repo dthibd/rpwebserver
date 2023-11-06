@@ -5,7 +5,7 @@ namespace WebComponentServer.Services.ReverseProxy;
 
 public class RoutesConfigProvider : IRoutesConfigProvider
 {
-    private readonly Dictionary<string, MutableRouteConfig> _routes = new Dictionary<string, MutableRouteConfig>();
+    public readonly Dictionary<string, MutableRouteConfig> Routes = new Dictionary<string, MutableRouteConfig>();
 
     public RoutesConfigProvider()
     {
@@ -14,71 +14,71 @@ public class RoutesConfigProvider : IRoutesConfigProvider
 
     public IReadOnlyList<RouteConfig> ToRouteConfigList()
     {
-        return _routes.Values
+        return Routes.Values
                 .Select(x => x.ToRouteConfig())
                 .ToList();
     }
 
     public MutableRouteConfig Create(string id)
     {
-        if (_routes.ContainsKey(id))
+        if (Routes.ContainsKey(id))
         {
             throw new ArgumentException($"RouteConfig with id {id} already exists");
         }
         
         var route = new MutableRouteConfig(id);
-        _routes.Add(id, route);
+        Routes.Add(id, route);
         
         return route;
     }
 
     public void Add(MutableRouteConfig routeConfig)
     {
-        if (_routes.ContainsKey(routeConfig.RouteId))
+        if (Routes.ContainsKey(routeConfig.RouteId))
         {
             throw new ArgumentException($"RouteConfig with id {routeConfig.RouteId} already exists");
         }
 
-        _routes.Add(routeConfig.RouteId, routeConfig);
+        Routes.Add(routeConfig.RouteId, routeConfig);
     }
 
     public void Update(MutableRouteConfig routeConfig)
     {
-        if (!_routes.ContainsKey(routeConfig.RouteId))
+        if (!Routes.ContainsKey(routeConfig.RouteId))
         {
             throw new ArgumentException($"RouteConfig with id {routeConfig.RouteId} not found");
         }
 
-        _routes[routeConfig.RouteId] = routeConfig;
+        Routes[routeConfig.RouteId] = routeConfig;
     }
 
     public void Remove(string id)
     {
-        if (!_routes.ContainsKey(id))
+        if (!Routes.ContainsKey(id))
         {
             throw new ArgumentException($"RouteConfig with id {id} not found");
         }
 
-        _routes.Remove(id);
+        Routes.Remove(id);
     }
 
     public IReadOnlyList<string> ListRouteIds()
     {
-        return _routes.Keys.ToList();
+        return Routes.Keys.ToList();
     }
 
     public MutableRouteConfig? GetRouteById(string id)
     {
-        if (!_routes.ContainsKey(id))
+        if (!Routes.ContainsKey(id))
         {
             return null;
         }
 
-        return _routes[id];
+        return Routes[id];
     }
 
     public IReadOnlyList<MutableRouteConfig> ListRoutes()
     {
-        return _routes.Values.ToList();
+        return Routes.Values.ToList();
     }
 }

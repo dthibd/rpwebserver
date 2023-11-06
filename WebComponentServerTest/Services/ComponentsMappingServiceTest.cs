@@ -6,7 +6,7 @@ using WebComponentServer.Configuration;
 using WebComponentServer.Core;
 using WebComponentServer.Services;
 
-namespace WebComponentServerTest;
+namespace WebComponentServerTest.Services;
 
 public class ComponentsMappingServiceTest
 {
