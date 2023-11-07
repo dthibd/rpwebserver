@@ -4,25 +4,21 @@ namespace WebComponentServer.Services.ReverseProxy.Config.Cluster;
 
 public class MutableClusterConfig
 {
-    private string _id;
-
-    private readonly FluentMutableClusterConfig _set;
-
     public MutableClusterConfig(string id)
     {
-        _id = id;
-        _set = new FluentMutableClusterConfig(this);
+        Id = id;
+        Set = new FluentMutableClusterConfig(this);
     }
 
-    public string Id => _id;
-    
+    public string Id { get; }
+
     public string? LoadBalancingPolicy { get; set; }
 
-    public FluentMutableClusterConfig Set => _set;
+    public FluentMutableClusterConfig Set { get; }
 
     public Dictionary<string, MutableDestinationConfig> Destinations { get; } = new Dictionary<string, MutableDestinationConfig>();
 
-    public ClusterConfig ToClusterConfig()
+    public virtual ClusterConfig ToClusterConfig()
     {
         return new ClusterConfig()
         {
@@ -34,19 +30,13 @@ public class MutableClusterConfig
 
     private Dictionary<string, DestinationConfig> BuildDestinationsConfigDictionary()
     {
-        var destinations = new Dictionary<string, DestinationConfig>();
-        
-        foreach (var entry in Destinations)
-        {
-            destinations.Add(entry.Key, entry.Value.ToDestinationConfig());
-        }
-
-        return destinations;
+        return Destinations.
+            ToDictionary(entry => entry.Key, entry => entry.Value.ToDestinationConfig());
     }
 
     public class FluentMutableClusterConfig
     {
-        private MutableClusterConfig _config;
+        private readonly MutableClusterConfig _config;
 
         public FluentMutableClusterConfig(MutableClusterConfig config)
         {
