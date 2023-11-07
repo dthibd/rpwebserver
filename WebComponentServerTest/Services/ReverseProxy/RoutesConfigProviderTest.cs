@@ -133,4 +133,82 @@ public class RoutesConfigProviderTest
         Assert.NotNull(firstEntry.Value);
         Assert.Equal(ClusterId, firstEntry.Value.ClusterId);
     }
+
+    [Fact]
+    public void RemoveNonExistingIdThrows()
+    {
+        var provider = new RoutesConfigProvider();
+
+        Assert.Throws<ArgumentException>(() => provider.Remove(RouteId));
+    }
+
+    [Fact]
+    public void RemoveExistingId()
+    {
+        var provider = new RoutesConfigProvider();
+        provider.Routes.Add(RouteId, TestRouteConfig);
+
+        Assert.Single(provider.Routes);
+
+        provider.Remove(RouteId);
+
+        Assert.Empty(provider.Routes);
+    }
+
+    [Fact]
+    public void ListRoutesIds()
+    {
+        var provider = new RoutesConfigProvider();
+        
+        provider.Add(new MutableRouteConfig("routeA"));
+        provider.Add(new MutableRouteConfig("routeB"));
+        
+        var ids = provider.ListRouteIds();
+
+        Assert.Equal(2, provider.Routes.Count);
+        Assert.Contains("routeA", ids);
+        Assert.Contains("routeB", ids);
+    }
+
+    [Fact]
+    public void GetRouteByIdWithExistingId()
+    {
+        var provider = new RoutesConfigProvider();
+
+        provider.Add(new MutableRouteConfig("routeA"));
+        provider.Add(new MutableRouteConfig("routeB"));
+
+        var route = provider.GetRouteById("routeB");
+
+        Assert.NotNull(route);
+        Assert.Equal("routeB", route.RouteId);
+    }
+
+    [Fact]
+    public void GetRouteByIdWithInvalidId()
+    {
+        var provider = new RoutesConfigProvider();
+
+        provider.Add(new MutableRouteConfig("routeA"));
+        provider.Add(new MutableRouteConfig("routeB"));
+
+        var route = provider.GetRouteById("routeC");
+
+        Assert.Null(route);
+    }
+
+    [Fact]
+    public void ListRoutes()
+    {
+        var provider = new RoutesConfigProvider();
+
+        provider.Add(new MutableRouteConfig("routeA"));
+        provider.Add(new MutableRouteConfig("routeB"));
+
+        var routes = provider.ListRoutes();
+
+        Assert.Equal(2, routes.Count);
+        Assert.Contains(routes, item => item.RouteId == "routeB");
+        Assert.Contains(routes, item => item.RouteId == "routeA");
+    }
 }
