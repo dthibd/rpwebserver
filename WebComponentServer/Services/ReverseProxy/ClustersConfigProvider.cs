@@ -18,14 +18,14 @@ public class ClustersConfigProvider : IClustersConfigProvider
 
     public MutableClusterConfig CreateCluster(string id)
     {
-         if (Clusters.ContainsKey(id))
-         {
-             throw new ArgumentException($"Invalid cluser configuration : cluster with {id} already exists");
-         }
+        if (Clusters.ContainsKey(id))
+        {
+            throw new ArgumentException($"Invalid cluster configuration : cluster with {id} already exists");
+        }
 
-         var clusterConfig = new MutableClusterConfig(id);
-         Clusters.Add(id, clusterConfig);
-         return clusterConfig;
+        var clusterConfig = new MutableClusterConfig(id);
+        Clusters.Add(id, clusterConfig);
+        return clusterConfig;
     }
 
     public IReadOnlyList<string> ListClusterIds()
@@ -68,4 +68,3 @@ public class ClustersConfigProvider : IClustersConfigProvider
         Clusters[clusterConfig.Id] = clusterConfig;
     }
 }
-
