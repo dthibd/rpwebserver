@@ -1,7 +1,10 @@
+using Ardalis.GuardClauses;
+using WebComponentServer.Guards;
 using WebComponentServer.Services.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.Configuration;
 
 namespace WebComponentServer.Services.ReverseProxy;
+
 
 public class ClustersConfigProvider : IClustersConfigProvider
 {
@@ -18,10 +21,7 @@ public class ClustersConfigProvider : IClustersConfigProvider
 
     public MutableClusterConfig CreateCluster(string id)
     {
-        if (Clusters.ContainsKey(id))
-        {
-            throw new ArgumentException($"Invalid cluster configuration : cluster with {id} already exists");
-        }
+        Guard.Against.DictionaryContainsKey(Clusters, id, $"Invalid cluster configuration : cluster with {id} already exists");
 
         var clusterConfig = new MutableClusterConfig(id);
         Clusters.Add(id, clusterConfig);
@@ -50,20 +50,19 @@ public class ClustersConfigProvider : IClustersConfigProvider
 
     public void AddCluster(MutableClusterConfig clusterConfig)
     {
-        if (Clusters.ContainsKey(clusterConfig.Id))
-        {
-            throw new ArgumentException($"Cluster with id {clusterConfig.Id} already exists");
-        }
+        Guard.Against.DictionaryContainsKey(Clusters, clusterConfig.Id, $"Cluster with id {clusterConfig.Id} already exists");
 
         Clusters.Add(clusterConfig.Id, clusterConfig);
     }
 
     public void UpdateCluster(MutableClusterConfig clusterConfig)
     {
-        if (!Clusters.ContainsKey(clusterConfig.Id))
-        {
-            throw new ArgumentException($"Cluster with id {clusterConfig.Id} not found");
-        }
+        Guard.Against.DictionaryDoesNotContainsKey(Clusters, clusterConfig.Id,
+            $"Cluster with id {clusterConfig.Id} not found");
+        // if (!Clusters.ContainsKey(clusterConfig.Id))
+        // {
+        //     throw new ArgumentException($"Cluster with id {clusterConfig.Id} not found");
+        // }
 
         Clusters[clusterConfig.Id] = clusterConfig;
     }
