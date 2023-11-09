@@ -1,3 +1,5 @@
+using Ardalis.GuardClauses;
+using WebComponentServer.Guards;
 using WebComponentServer.Services.ReverseProxy.Config.Route;
 using Yarp.ReverseProxy.Configuration;
 
@@ -21,10 +23,7 @@ public class RoutesConfigProvider : IRoutesConfigProvider
 
     public MutableRouteConfig Create(string id)
     {
-        if (Routes.ContainsKey(id))
-        {
-            throw new ArgumentException($"RouteConfig with id {id} already exists");
-        }
+        Guard.Against.DictionaryContainsKey(Routes, id, $"RouteConfig with id {id} already exists");
         
         var route = new MutableRouteConfig(id);
         Routes.Add(id, route);
@@ -34,30 +33,23 @@ public class RoutesConfigProvider : IRoutesConfigProvider
 
     public void Add(MutableRouteConfig routeConfig)
     {
-        if (Routes.ContainsKey(routeConfig.RouteId))
-        {
-            throw new ArgumentException($"RouteConfig with id {routeConfig.RouteId} already exists");
-        }
+        Guard.Against.DictionaryContainsKey(Routes, routeConfig.RouteId,
+            $"RouteConfig with id {routeConfig.RouteId} already exists");
 
         Routes.Add(routeConfig.RouteId, routeConfig);
     }
 
     public void Update(MutableRouteConfig routeConfig)
     {
-        if (!Routes.ContainsKey(routeConfig.RouteId))
-        {
-            throw new ArgumentException($"RouteConfig with id {routeConfig.RouteId} not found");
-        }
+        Guard.Against.DictionaryDoesNotContainsKey(Routes, routeConfig.RouteId,
+            $"RouteConfig with id {routeConfig.RouteId} not found");
 
         Routes[routeConfig.RouteId] = routeConfig;
     }
 
     public void Remove(string id)
     {
-        if (!Routes.ContainsKey(id))
-        {
-            throw new ArgumentException($"RouteConfig with id {id} not found");
-        }
+        Guard.Against.DictionaryDoesNotContainsKey(Routes, id, $"RouteConfig with id {id} not found");
 
         Routes.Remove(id);
     }

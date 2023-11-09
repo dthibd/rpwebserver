@@ -129,7 +129,7 @@ public class ClusterConfigProviderTest
 
         var newCluster = new MutableClusterConfig("test")
         {
-            LoadBalancingPolicy = "LBP-Test"
+            LoadBalancingPolicy = LoadBalancingValue.RoundRobin
         };
 
         provider.UpdateCluster(newCluster);
@@ -138,7 +138,7 @@ public class ClusterConfigProviderTest
 
         Assert.NotNull(updatedCluster);
         Assert.NotNull(updatedCluster.LoadBalancingPolicy);
-        Assert.Equal("LBP-Test", updatedCluster.LoadBalancingPolicy);
+        Assert.Equal(LoadBalancingValue.RoundRobin, updatedCluster.LoadBalancingPolicy);
     }
 
     [Fact]
@@ -148,7 +148,7 @@ public class ClusterConfigProviderTest
         
         var newCluster = new MutableClusterConfig("test")
         {
-            LoadBalancingPolicy = "LBP-Test"
+            LoadBalancingPolicy = LoadBalancingValue.RoundRobin
         };
 
         Assert.Throws<ArgumentException>(() => provider.UpdateCluster(newCluster));

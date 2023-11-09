@@ -1,3 +1,4 @@
+using WebComponentServer.Services.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.Configuration;
 using Yarp.ReverseProxy.LoadBalancing;
 
@@ -25,7 +26,7 @@ public class CustomProxyConfigProvider : IProxyConfigProvider
         });
         
         _clustersConfigProvider.CreateCluster("AngularWC").Set
-            .LoadBalancingPolicy(LoadBalancingPolicies.RoundRobin)
+            .LoadBalancingPolicy(LoadBalancingValue.RoundRobin)
             .AddDefaultDestination("http://localhost:8003");
 
         _routesConfigProvider.Create("AngularWC").Set

@@ -12,7 +12,7 @@ public class MutableClusterConfig
 
     public string Id { get; }
 
-    public string? LoadBalancingPolicy { get; set; }
+    public LoadBalancingValue? LoadBalancingPolicy { get; set; }
 
     public FluentMutableClusterConfig Set { get; }
 
@@ -23,12 +23,12 @@ public class MutableClusterConfig
         return new ClusterConfig()
         {
             ClusterId = Id,
-            LoadBalancingPolicy = LoadBalancingPolicy,
+            LoadBalancingPolicy = LoadBalancingPolicy?.Name,
             Destinations = BuildDestinationsConfigDictionary()
         };
     }
 
-    private Dictionary<string, DestinationConfig> BuildDestinationsConfigDictionary()
+    public Dictionary<string, DestinationConfig> BuildDestinationsConfigDictionary()
     {
         return Destinations.
             ToDictionary(entry => entry.Key, entry => entry.Value.ToDestinationConfig());
@@ -43,7 +43,7 @@ public class MutableClusterConfig
             _config = config;
         }
 
-        public FluentMutableClusterConfig LoadBalancingPolicy(string policy)
+        public FluentMutableClusterConfig LoadBalancingPolicy(LoadBalancingValue policy)
         {
             _config.LoadBalancingPolicy = policy;
             return this;
