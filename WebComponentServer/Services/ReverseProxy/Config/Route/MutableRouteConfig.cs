@@ -19,9 +19,9 @@ public class MutableRouteConfig
 
     public string? ClusterId { get; set; }
 
-    public MutableRouteMatch Match { get; set; } = new MutableRouteMatch();
+    public MutableRouteMatch Match { get; } = new MutableRouteMatch();
 
-    public MutableRouteTransforms Transforms { get; set; } = new MutableRouteTransforms();
+    public MutableRouteTransforms Transforms { get; } = new MutableRouteTransforms();
     
     public virtual RouteConfig ToRouteConfig()
     {
