@@ -2,32 +2,27 @@ namespace WebComponentServer.Services.ReverseProxy.Config.Route;
 
 public class MutableRouteTransforms
 {
-    private List<Dictionary<string, string>> _transforms;
+    public List<Dictionary<string, string>> Transforms { get; }
 
     public MutableRouteTransforms()
     {
-        _transforms = new List<Dictionary<string, string>>();
+        Transforms = new List<Dictionary<string, string>>();
     }
 
     public MutableRouteTransforms(List<Dictionary<string, string>> transforms)
     {
-        _transforms = transforms;
+        Transforms = transforms;
     }
     
     public void AddPathRemovePrefix(string path)
     {
-        _transforms.Add(
+        Transforms.Add(
             new Dictionary<string, string>(){ {"PathRemovePrefix", path} }
         );
     }
 
     public IReadOnlyList<IReadOnlyDictionary<string, string>>? ToRouteTransforms()
     {
-        if (!_transforms.Any())
-        {
-            return null;
-        }
-
-        return _transforms;
+        return Transforms;
     }
 }
