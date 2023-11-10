@@ -5,13 +5,13 @@ namespace WebComponentServer.Services.ReverseProxy;
 
 public class CustomMemoryConfig : IProxyConfig
 {
-    private readonly CancellationTokenSource _cts = new CancellationTokenSource();
+    public readonly CancellationTokenSource CTS = new CancellationTokenSource();
 
     public CustomMemoryConfig(IReadOnlyList<RouteConfig> routes, IReadOnlyList<ClusterConfig> clusters)
     {
         Routes = routes;
         Clusters = clusters;
-        ChangeToken = new CancellationChangeToken(_cts.Token);
+        ChangeToken = new CancellationChangeToken(CTS.Token);
     }
 
     public IReadOnlyList<RouteConfig> Routes { get; }
@@ -19,10 +19,9 @@ public class CustomMemoryConfig : IProxyConfig
     public IReadOnlyList<ClusterConfig> Clusters { get; }
 
     public IChangeToken ChangeToken { get; }
-
-    internal void SignalChange()
+    public void SignalChange()
     {
-        _cts.Cancel();
+        CTS.Cancel();
     }
     
 }
