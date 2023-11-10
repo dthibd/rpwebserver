@@ -12,11 +12,11 @@ public class MutableClusterConfig
 
     public string Id { get; }
 
-    public LoadBalancingValue? LoadBalancingPolicy { get; set; }
+    public virtual LoadBalancingValue? LoadBalancingPolicy { get; set; }
 
-    public FluentMutableClusterConfig Set { get; }
+    public virtual FluentMutableClusterConfig Set { get; }
 
-    public Dictionary<string, MutableDestinationConfig> Destinations { get; } = new Dictionary<string, MutableDestinationConfig>();
+    public virtual Dictionary<string, MutableDestinationConfig> Destinations { get; } = new Dictionary<string, MutableDestinationConfig>();
 
     public virtual ClusterConfig ToClusterConfig()
     {
@@ -43,13 +43,13 @@ public class MutableClusterConfig
             _config = config;
         }
 
-        public FluentMutableClusterConfig LoadBalancingPolicy(LoadBalancingValue policy)
+        public virtual FluentMutableClusterConfig LoadBalancingPolicy(LoadBalancingValue policy)
         {
             _config.LoadBalancingPolicy = policy;
             return this;
         }
 
-        public FluentMutableClusterConfig AddDefaultDestination(string address)
+        public virtual FluentMutableClusterConfig AddDefaultDestination(string address)
         {
             _config.Destinations.Add("default", new MutableDestinationConfig(address));
             return this;

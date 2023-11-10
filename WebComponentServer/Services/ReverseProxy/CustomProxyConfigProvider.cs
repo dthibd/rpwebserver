@@ -1,43 +1,47 @@
 using WebComponentServer.Services.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.Configuration;
-using Yarp.ReverseProxy.LoadBalancing;
 
 namespace WebComponentServer.Services.ReverseProxy;
 
 public class CustomProxyConfigProvider : IProxyConfigProvider
 {
-    private CustomMemoryConfig _config;
-    private IClustersConfigProvider _clustersConfigProvider;
-    private IRoutesConfigProvider _routesConfigProvider;
-    private IReverseProxyChangesMonitor _changeMonitor;
+    public ICustomMemoryConfig Config { get; set; }
+    public ICustomMemoryConfigFactory ConfigFactory { get; }
+    public IClustersConfigProvider ClustersConfigProvider { get; }
+    public IRoutesConfigProvider RoutesConfigProvider { get; }
+    public IReverseProxyChangesMonitor ChangeMonitor { get; }
 
     public CustomProxyConfigProvider(
         IClustersConfigProvider clustersConfigProvider, 
         IRoutesConfigProvider routesConfigProvider,
-        IReverseProxyChangesMonitor changeMonitor )
+        IReverseProxyChangesMonitor changeMonitor,
+        ICustomMemoryConfigFactory configFactory )
     {
-        _clustersConfigProvider = clustersConfigProvider;
-        _routesConfigProvider = routesConfigProvider;
-        _changeMonitor = changeMonitor;
+        ClustersConfigProvider = clustersConfigProvider;
+        RoutesConfigProvider = routesConfigProvider;
+        ChangeMonitor = changeMonitor;
+        ConfigFactory = configFactory;
 
-        _changeMonitor.UpdateObservable.Subscribe((value) =>
+        ChangeMonitor.UpdateObservable.Subscribe((value) =>
         {
             Update();
         });
         
-        _clustersConfigProvider.CreateCluster("AngularWC").Set
+        ClustersConfigProvider.CreateCluster("AngularWC").Set
             .LoadBalancingPolicy(LoadBalancingValue.RoundRobin)
             .AddDefaultDestination("http://localhost:8003");
 
-        _routesConfigProvider.Create("AngularWC").Set
+        RoutesConfigProvider.Create("AngularWC").Set
             .ClusterId("AngularWC")
             .Match_CatchAllPath("test/url/angular")
             .Transforms_PathRemovePrefix("/test/url/angular");
         
-        _config = new CustomMemoryConfig(_routesConfigProvider.ToRouteConfigList(), _clustersConfigProvider.ToClusterConfigList());
+        // Config = new CustomMemoryConfig(RoutesConfigProvider.ToRouteConfigList(), ClustersConfigProvider.ToClusterConfigList());
+        Config = ConfigFactory.CreateInstance(RoutesConfigProvider.ToRouteConfigList(),
+            ClustersConfigProvider.ToClusterConfigList());
     }
 
-    public IProxyConfig GetConfig() => _config;
+    public IProxyConfig GetConfig() => Config;
 
     /// <summary>
     /// By calling this method from the source we can dynamically adjust the proxy configuration.
@@ -45,15 +49,16 @@ public class CustomProxyConfigProvider : IProxyConfigProvider
     /// </summary>
     public void Update(IReadOnlyList<RouteConfig> routes, IReadOnlyList<ClusterConfig> clusters)
     {
-        var oldConfig = _config;
-        _config = new CustomMemoryConfig(routes, clusters);
+        var oldConfig = Config;
+        Config = new CustomMemoryConfig(routes, clusters);
         oldConfig.SignalChange();
     }
 
     public void Update()
     {
-        var oldConfig = _config;
-        _config = new CustomMemoryConfig(_routesConfigProvider.ToRouteConfigList(), _clustersConfigProvider.ToClusterConfigList());
+        var oldConfig = Config;
+        // Config = new CustomMemoryConfig(RoutesConfigProvider.ToRouteConfigList(), ClustersConfigProvider.ToClusterConfigList());
+        Config = ConfigFactory.CreateInstance(RoutesConfigProvider.ToRouteConfigList(), ClustersConfigProvider.ToClusterConfigList());
         oldConfig.SignalChange();
     }
 }

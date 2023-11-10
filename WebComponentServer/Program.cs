@@ -18,6 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
+    .AddSingleton<ICustomMemoryConfigFactory, CustomMemoryConfigFactory>()
     .AddSingleton<IComponentProviderFactory, ComponentProviderFactory>()
     .AddSingleton<IComponentsMappingService, ComponentsMappingService>()
     .AddSingleton<IReverseProxyChangesMonitor, ReverseProxyChangesMonitor>()

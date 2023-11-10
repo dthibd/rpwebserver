@@ -3,7 +3,7 @@ using Yarp.ReverseProxy.Configuration;
 
 namespace WebComponentServer.Services.ReverseProxy;
 
-public class CustomMemoryConfig : IProxyConfig
+public class CustomMemoryConfig : ICustomMemoryConfig
 {
     public readonly CancellationTokenSource CTS = new CancellationTokenSource();
 

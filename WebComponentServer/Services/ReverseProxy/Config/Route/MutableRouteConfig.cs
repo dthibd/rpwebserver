@@ -13,7 +13,7 @@ public class MutableRouteConfig
         _set = new FluentMutableRouteConfig(this);
     }
 
-    public FluentMutableRouteConfig Set => _set;
+    public virtual FluentMutableRouteConfig Set => _set;
     
     public string RouteId => _id;
 
@@ -44,19 +44,19 @@ public class MutableRouteConfig
             _config = config;
         }
 
-        public FluentMutableRouteConfig ClusterId(string clusterId)
+        public virtual FluentMutableRouteConfig ClusterId(string clusterId)
         {
             _config.ClusterId = clusterId;
             return this;
         }
 
-        public FluentMutableRouteConfig Match_CatchAllPath(string match)
+        public virtual FluentMutableRouteConfig Match_CatchAllPath(string match)
         {
             _config.Match.SetCatchAllPath(match);
             return this;
         }
 
-        public FluentMutableRouteConfig Transforms_PathRemovePrefix(string path)
+        public virtual FluentMutableRouteConfig Transforms_PathRemovePrefix(string path)
         {
             _config.Transforms.AddPathRemovePrefix(path);
             return this;
