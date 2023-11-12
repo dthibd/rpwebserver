@@ -5,7 +5,6 @@ using WebComponentServer.Services.ReverseProxy.Config.Cluster;
 
 namespace WebComponentServer.AutoMapping;
 
-[ExcludeFromCodeCoverage]
 public class ClusterConfigProfile : Profile
 {
     public ClusterConfigProfile()

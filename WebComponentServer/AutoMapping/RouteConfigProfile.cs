@@ -5,7 +5,7 @@ using WebComponentServer.Services.ReverseProxy.Config.Route;
 
 namespace WebComponentServer.AutoMapping;
 
-[ExcludeFromCodeCoverage]
+
 public class RouteConfigProfile : Profile
 {
     public RouteConfigProfile()
