@@ -6,16 +6,16 @@ namespace WebComponentServer.Handlers.ReverseProxy.Routes;
 
 public class ListRouteIdsHandler : IRequestHandler<ListRouteIdsRequest, ListRouteIdsRequestResponse>
 {
-    private IRoutesConfigProvider _routesConfigProvider;
+    public IRoutesConfigProvider RoutesConfigProvider { get; }
 
     public ListRouteIdsHandler(IRoutesConfigProvider routesConfigProvider)
     {
-        _routesConfigProvider = routesConfigProvider;
+        RoutesConfigProvider = routesConfigProvider;
     }
     
     public async Task<ListRouteIdsRequestResponse> Handle(ListRouteIdsRequest request, CancellationToken cancellationToken)
     {
-        var routesById = _routesConfigProvider.ListRouteIds();
+        var routesById = RoutesConfigProvider.ListRouteIds();
         return new ListRouteIdsRequestResponse(routesById);
     }
 }

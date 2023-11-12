@@ -55,6 +55,7 @@ public class ListRoutesHandlerTest
         var dtoList = response.Value;
         
         Assert.NotNull(response);
+        Assert.True(response.Succeeded);
         Assert.NotNull(dtoList);
         Assert.Single(dtoList);
         Assert.Equal("testA", dtoList.First().RouteId);

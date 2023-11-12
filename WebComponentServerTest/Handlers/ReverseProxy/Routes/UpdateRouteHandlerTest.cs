@@ -54,7 +54,7 @@ public class UpdateRouteHandlerTest
     }
 
     [Fact]
-    public async void HandlerThrows()
+    public async void HandlerReturnsFailure()
     {
         var request = new UpdateRouteRequest(
             new RouteConfigDto()
