@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using WebComponentServer.Models.ClusterConfig;
 using WebComponentServer.Services.ReverseProxy.Config.Cluster;
 
 namespace WebComponentServer.AutoMapping;
 
+[ExcludeFromCodeCoverage]
 public class ClusterConfigProfile : Profile
 {
     public ClusterConfigProfile()

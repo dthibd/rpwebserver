@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using MediatR;
 using WebComponentServer.Commands.Responses;
 using WebComponentServer.Models.ClusterConfig;
 
 namespace WebComponentServer.Commands.ReverseProxy.Clusters;
 
+[ExcludeFromCodeCoverage]
 public class GetClusterByIdResponse : RequestResponse<ClusterConfigDto>
 {
     public GetClusterByIdResponse(ClusterConfigDto value) : base(value)
@@ -15,6 +17,7 @@ public class GetClusterByIdResponse : RequestResponse<ClusterConfigDto>
     }
 }
 
+[ExcludeFromCodeCoverage]
 public class GetClusterByIdRequest : IRequest<GetClusterByIdResponse>
 {
     public string Id { get; }

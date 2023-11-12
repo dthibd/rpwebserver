@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using MediatR;
 using WebComponentServer.Commands.Responses;
 
 namespace WebComponentServer.Commands.ReverseProxy.Clusters;
 
+[ExcludeFromCodeCoverage]
 public class ListClusterIdsResponse : RequestResponse<IReadOnlyList<string>>
 {
     public IReadOnlyList<string> Ids { get; }
@@ -16,7 +18,7 @@ public class ListClusterIdsResponse : RequestResponse<IReadOnlyList<string>>
     }
 }
 
-
+[ExcludeFromCodeCoverage]
 public class ListClusterIdsRequest : IRequest<ListClusterIdsResponse>
 {
 }
