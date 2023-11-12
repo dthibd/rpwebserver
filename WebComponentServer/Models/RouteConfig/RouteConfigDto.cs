@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebComponentServer.Models.RouteConfig;
 
+[ExcludeFromCodeCoverage]
 public class RouteConfigDto
 {
     public string RouteId { get; set; }

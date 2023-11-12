@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebComponentServer.Models.ClusterConfig;
 
+[ExcludeFromCodeCoverage]
 public class ClusterConfigDto
 {
     public string ClusterId { get; set; }
