@@ -7,18 +7,18 @@ namespace WebComponentServer.Handlers.ReverseProxy.Routes;
 
 public class DeleteRouteHandler : IRequestHandler<DeleteRouteRequest, RequestResponse>
 {
-    private IRoutesConfigProvider _routesConfigProvider;
+    public IRoutesConfigProvider RoutesConfigProvider { get; }
 
     public DeleteRouteHandler(IRoutesConfigProvider routesConfigProvider)
     {
-        _routesConfigProvider = routesConfigProvider;
+        RoutesConfigProvider = routesConfigProvider;
     }
     
     public async Task<RequestResponse> Handle(DeleteRouteRequest request, CancellationToken cancellationToken)
     {
         try
         {
-            _routesConfigProvider.Remove(request.Id);
+            RoutesConfigProvider.Remove(request.Id);
 
             return new RequestResponse();
         }
