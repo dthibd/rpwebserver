@@ -5,5 +5,5 @@ namespace WebComponentServer.Models.ClusterConfig;
 [ExcludeFromCodeCoverage]
 public class DestinationConfigDto
 {
-    public string Address { get; set; }
+    public string? Address { get; set; }
 }

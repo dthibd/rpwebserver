@@ -9,9 +9,9 @@ public class MutableRouteTransforms
         Transforms = new List<Dictionary<string, string>>();
     }
 
-    public MutableRouteTransforms(List<Dictionary<string, string>> transforms)
+    public MutableRouteTransforms(List<Dictionary<string, string>>? transforms)
     {
-        Transforms = transforms;
+        Transforms = transforms ?? new List<Dictionary<string, string>>(); 
     }
     
     public void AddPathRemovePrefix(string path)

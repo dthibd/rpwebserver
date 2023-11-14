@@ -5,5 +5,5 @@ namespace WebComponentServer.Models.RouteConfig;
 [ExcludeFromCodeCoverage]
 public class RouteMatchDto
 {
-    public string Path { get; set; }
+    public string? Path { get; set; }
 }

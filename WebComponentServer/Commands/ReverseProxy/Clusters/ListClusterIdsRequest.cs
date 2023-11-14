@@ -7,8 +7,6 @@ namespace WebComponentServer.Commands.ReverseProxy.Clusters;
 [ExcludeFromCodeCoverage]
 public class ListClusterIdsResponse : RequestResponse<IReadOnlyList<string>>
 {
-    public IReadOnlyList<string> Ids { get; }
-
     public ListClusterIdsResponse(IReadOnlyList<string> value) : base(value)
     {
     }

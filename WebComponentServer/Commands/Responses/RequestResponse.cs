@@ -10,7 +10,7 @@ public class RequestResponse
         Succeeded = true;
     }
     
-    public RequestResponse(bool success = false, string error = null)
+    public RequestResponse(bool success = false, string? error = null)
     {
         Error = error;
         Succeeded = false;

@@ -29,17 +29,14 @@ public class ComponentsMappingServiceTest
     {
         FileProviderOptions = new []
         {
-            Options.Create<FileProviderOptions>(new FileProviderOptions()
-            {
-                BaseUrl = BaseUrls[0],
-                FilePath = FilePaths[0]
-            }),
-            Options.Create<FileProviderOptions>(new FileProviderOptions()
-            {
-                BaseUrl = BaseUrls[1],
-                FilePath = FilePaths[1]
-            })
+            Options.Create<FileProviderOptions>(new FileProviderOptions(
+                FilePaths[0],
+                BaseUrls[0] )),
 
+            Options.Create<FileProviderOptions>(new FileProviderOptions(
+                FilePaths[1],
+                BaseUrls[1]
+                ))
         };
 
         WebComponentOptions = new[]

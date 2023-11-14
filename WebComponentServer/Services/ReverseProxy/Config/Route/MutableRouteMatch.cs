@@ -9,7 +9,7 @@ public class MutableRouteMatch
     {
     }
     
-    public string Path { get; set; }
+    public string? Path { get; set; }
 
     public void SetCatchAllPath(string path)
     {
