@@ -6,9 +6,9 @@ using WebComponentServer.Models.RouteConfig;
 namespace WebComponentServer.Commands.ReverseProxy.Routes;
 
 [ExcludeFromCodeCoverage]
-public class GetRouteByIdResponse : RequestResponse<RouteConfigDto>
+public class GetRouteByIdResponse : RequestResponse<RouteConfigDto?>
 {
-    public GetRouteByIdResponse(RouteConfigDto value) : base(value)
+    public GetRouteByIdResponse(RouteConfigDto? value) : base(value)
     {
     }
 }
