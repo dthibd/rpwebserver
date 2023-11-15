@@ -8,21 +8,21 @@ namespace WebComponentServer.Handlers.ReverseProxy.Clusters;
 
 public class UpdateClusterHandler : IRequestHandler<UpdateClusterRequest, UpdateClusterResponse>
 {
-    private IClustersConfigProvider _clusterConfigProvider;
-    private IMapper _mapper;
+    public IClustersConfigProvider ClusterConfigProvider { get; }
+    public IMapper Mapper { get; }
 
     public UpdateClusterHandler(IMapper mapper, IClustersConfigProvider clusterConfigProvider)
     {
-        _mapper = mapper;
-        _clusterConfigProvider = clusterConfigProvider;
+        Mapper = mapper;
+        ClusterConfigProvider = clusterConfigProvider;
     }
     
     public async Task<UpdateClusterResponse> Handle(UpdateClusterRequest request, CancellationToken cancellationToken)
     {
         try
         {
-            var clusterConfig = _mapper.Map<MutableClusterConfig>(request.ClusterConfig);
-            _clusterConfigProvider.UpdateCluster(clusterConfig);
+            var clusterConfig = Mapper.Map<MutableClusterConfig>(request.ClusterConfig);
+            ClusterConfigProvider.UpdateCluster(clusterConfig);
 
             return new UpdateClusterResponse(request.ClusterConfig);
         }
