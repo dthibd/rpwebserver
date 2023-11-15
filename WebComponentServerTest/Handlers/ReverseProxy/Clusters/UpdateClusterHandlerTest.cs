@@ -8,7 +8,7 @@ using WebComponentServer.Services.ReverseProxy.Config.Cluster;
 
 namespace WebComponentServerTest.Handlers.ReverseProxy.Clusters;
 
-public class UpdateclusterHandlerTest
+public class UpdateClusterHandlerTest
 {
     public Mock<IClustersConfigProvider> ClustersConfigProviderMock { get; } = new();
 
@@ -18,7 +18,7 @@ public class UpdateclusterHandlerTest
 
     public MutableClusterConfig MutableClusterCfg { get; } = new("testId");
 
-    public UpdateclusterHandlerTest()
+    public UpdateClusterHandlerTest()
     {
         MapperMock
             .Setup(it => it.Map<MutableClusterConfig>(ClusterCfgDto))
