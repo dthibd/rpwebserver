@@ -6,16 +6,16 @@ namespace WebComponentServer.Handlers.ReverseProxy.Clusters;
 
 public class ListClusterIdsHandler : IRequestHandler<ListClusterIdsRequest, ListClusterIdsResponse>
 {
-    private IClustersConfigProvider _clustersConfigProvider;
+    public IClustersConfigProvider ClustersConfigProvider { get; }
 
     public ListClusterIdsHandler(IClustersConfigProvider clustersConfigProvider)
     {
-        _clustersConfigProvider = clustersConfigProvider;
+        ClustersConfigProvider = clustersConfigProvider;
     }
     
     public async Task<ListClusterIdsResponse> Handle(ListClusterIdsRequest request, CancellationToken cancellationToken)
     {
-        var clusterIds = _clustersConfigProvider.ListClusterIds();
+        var clusterIds = ClustersConfigProvider.ListClusterIds();
 
         return new ListClusterIdsResponse(clusterIds);
     }
