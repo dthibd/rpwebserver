@@ -2,6 +2,14 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "type": "process",
+            "label": "test coverage",
+            "command":"node",
+            "args": [
+                "scripts/test-coverage.js"
+            ]
+        },
+        {
             "label": "build",
             "command": "dotnet",
             "type": "process",
