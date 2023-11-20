@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using WebComponentServer.Models.RouteConfig;
 using WebComponentServer.Services.ReverseProxy.Config.Route;
@@ -10,18 +9,18 @@ public class RouteConfigProfile : Profile
 {
     public RouteConfigProfile()
     {
-        CreateMap<MutableRouteConfig, RouteConfigDto>()
-            .ForMember(dest => dest.Transforms, 
-                opt => opt.MapFrom(src => src.Transforms.ToRouteTransforms()));
+        CreateMap<MutableRouteConfig, RouteConfigDto>();
         CreateMap<MutableRouteMatch, RouteMatchDto>();
-        
+        CreateMap<MutableRouteTransforms, List<Dictionary<string, string>>>()
+            .ConvertUsing((source, destination, context) => source.Transforms);
+
         CreateMap<RouteConfigDto, MutableRouteConfig>()
-            .ForCtorParam("id", opt => opt.MapFrom(src => src.RouteId))
-            .ForMember(dest => dest.Transforms,
-                opt =>
-                {
-                    opt.MapFrom(src => new MutableRouteTransforms(src.Transforms));
-                });
+            .ForCtorParam("id", opt => opt.MapFrom(src => src.RouteId));
         CreateMap<RouteMatchDto, MutableRouteMatch>();
+        CreateMap<List<Dictionary<string, string>>, MutableRouteTransforms>()
+            .ConvertUsing((source, destination, context) => new MutableRouteTransforms()
+            {
+                Transforms = source
+            });
     }
 }

@@ -23,7 +23,10 @@ public class MutableRouteTransformsTest
             }
         );
         
-        var routeTransforms = new MutableRouteTransforms(transformsList);
+        var routeTransforms = new MutableRouteTransforms()
+        {
+            Transforms = transformsList
+        };
 
         Assert.Single(routeTransforms.Transforms);
 
