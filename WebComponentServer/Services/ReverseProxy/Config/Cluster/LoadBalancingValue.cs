@@ -9,6 +9,5 @@ public class LoadBalancingValue : SmartEnum<LoadBalancingValue>
     
     private LoadBalancingValue(string name, int value) : base(name, value)
     {
-        
     }
 }
