@@ -7,7 +7,7 @@ namespace RPWebServerTest.Handlers.ReverseProxy.Clusters;
 
 public class ListClusterIdsHandlerTest
 {
-    public Mock<IClustersConfigProvider> ClustersConfigProviderMock { get; set; } = new();
+    public Mock<IClustersConfigProvider> ClustersConfigProviderMock { get; } = new();
 
     public ListClusterIdsHandlerTest()
     {
