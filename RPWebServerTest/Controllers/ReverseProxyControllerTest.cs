@@ -13,7 +13,7 @@ namespace RPWebServerTest.Controllers;
 
 public class ReverseProxyControllerTest
 {
-    public Mock<IMediator> MediatorMock { get; set; } = new();
+    public Mock<IMediator> MediatorMock { get; } = new();
 
     [Fact]
     public void Construction()

@@ -10,9 +10,9 @@ namespace RPWebServerTest.Handlers.ReverseProxy.Clusters;
 
 public class AddClusterHandlerTest
 {
-    public Mock<IClustersConfigProvider> ClustersConfigProviderMock { get; set; } = new();
+    public Mock<IClustersConfigProvider> ClustersConfigProviderMock { get; } = new();
     
-    public Mock<IMapper> MapperMock { get; set; } = new();
+    public Mock<IMapper> MapperMock { get;} = new();
 
     public ClusterConfigDto ClusterDto {get;} = new ClusterConfigDto{ ClusterId = "test-cluster" };
 
