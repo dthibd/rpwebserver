@@ -12,8 +12,8 @@ public class RequestResponse
     
     public RequestResponse(bool success = false, string? error = null)
     {
-        Error = error;
-        Succeeded = false;
+        Error = success ? null : error;
+        Succeeded = success;
     }
 }
 

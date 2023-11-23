@@ -12,25 +12,25 @@ namespace RPWebServer.Controllers;
 [Route("[controller]")]
 public class ReverseProxyController : Controller
 {
-    private IMediator _mediator;
+    public IMediator Mediator { get; }
 
     public ReverseProxyController(
         IMediator mediator)
     {
-        _mediator = mediator;
+        Mediator = mediator;
     }
 
     [HttpGet("Routes/Ids")]
     public async Task<IActionResult> ListRouteIds()
     {
-        var response = await _mediator.Send<ListRouteIdsRequestResponse>(new ListRouteIdsRequest());
+        var response = await Mediator.Send<ListRouteIdsRequestResponse>(new ListRouteIdsRequest());
         return Ok(response.Value);
     }
 
     [HttpGet("Routes")]
     public async Task<IActionResult> ListRoutes()
     {
-        var response = await _mediator.Send<ListRoutesRequestResponse>(new ListRoutesRequest());
+        var response = await Mediator.Send<ListRoutesRequestResponse>(new ListRoutesRequest());
 
         return Ok(response.Value);
     }
@@ -38,7 +38,7 @@ public class ReverseProxyController : Controller
     [HttpGet("Route/{id}")]
     public async Task<IActionResult> GetRouteById(string id)
     {
-        var response = await _mediator.Send<GetRouteByIdResponse>(new GetRouteByIdRequest(id));
+        var response = await Mediator.Send<GetRouteByIdResponse>(new GetRouteByIdRequest(id));
 
         return Ok(response.Value);
     }
@@ -46,7 +46,7 @@ public class ReverseProxyController : Controller
     [HttpPost("Route")]
     public async Task<IActionResult> AddRoute([FromBody] RouteConfigDto routeConfigDto)
     {
-        var response = await _mediator.Send<AddRouteResponse>(new AddRouteRequest(routeConfigDto));
+        var response = await Mediator.Send<AddRouteResponse>(new AddRouteRequest(routeConfigDto));
 
         if (!response.Succeeded)
         {
@@ -59,7 +59,7 @@ public class ReverseProxyController : Controller
     [HttpPut("Route")]
     public async Task<IActionResult> UpdateRoute([FromBody] RouteConfigDto routeConfigDto)
     {
-        var result = await _mediator.Send<RequestResponse>(new UpdateRouteRequest(routeConfigDto));
+        var result = await Mediator.Send<RequestResponse>(new UpdateRouteRequest(routeConfigDto));
 
         if (!result.Succeeded)
         {
@@ -72,7 +72,7 @@ public class ReverseProxyController : Controller
     [HttpDelete("Route/{id}")]
     public async Task<IActionResult> DeleteRoute(string id)
     {
-        var response = await _mediator.Send<RequestResponse>(new DeleteRouteRequest(id));
+        var response = await Mediator.Send<RequestResponse>(new DeleteRouteRequest(id));
 
         if (!response.Succeeded)
         {
@@ -86,7 +86,7 @@ public class ReverseProxyController : Controller
     [HttpGet("Clusters/Ids")]
     public async Task<IActionResult> ListClusterIds()
     {
-        var response = await _mediator.Send<ListClusterIdsResponse>(new ListClusterIdsRequest());
+        var response = await Mediator.Send<ListClusterIdsResponse>(new ListClusterIdsRequest());
 
         return Ok(response.Value);
     }
@@ -94,7 +94,7 @@ public class ReverseProxyController : Controller
     [HttpGet("Clusters")]
     public async Task<IActionResult> ListClusters()
     {
-        var response = await _mediator.Send<ListClustersResponse>(new ListClustersRequest());
+        var response = await Mediator.Send<ListClustersResponse>(new ListClustersRequest());
 
         return Ok(response.Value);
     }
@@ -102,7 +102,7 @@ public class ReverseProxyController : Controller
     [HttpGet("cluster/{id}")]
     public async Task<IActionResult> GetClusterById(string id)
     {
-        var response = await _mediator.Send<GetClusterByIdResponse>(new GetClusterByIdRequest(id));
+        var response = await Mediator.Send<GetClusterByIdResponse>(new GetClusterByIdRequest(id));
 
         return Ok(response.Value);
     }
@@ -110,7 +110,7 @@ public class ReverseProxyController : Controller
     [HttpPost("cluster")]
     public async Task<IActionResult> AddCluster([FromBody] ClusterConfigDto clusterConfigDto)
     {
-        var response = await _mediator.Send<AddClusterResponse>(new AddClusterRequest(clusterConfigDto));
+        var response = await Mediator.Send<AddClusterResponse>(new AddClusterRequest(clusterConfigDto));
 
         if (!response.Succeeded)
         {
@@ -123,7 +123,7 @@ public class ReverseProxyController : Controller
     [HttpPut("cluster")]
     public async Task<IActionResult> UpdateCluster([FromBody] ClusterConfigDto clusterConfig)
     {
-        var response = await _mediator.Send<UpdateClusterResponse>(new UpdateClusterRequest(clusterConfig));
+        var response = await Mediator.Send<UpdateClusterResponse>(new UpdateClusterRequest(clusterConfig));
 
         if (!response.Succeeded)
         {
@@ -136,7 +136,7 @@ public class ReverseProxyController : Controller
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh()
     {
-        await _mediator.Send(new RefreshReverseProxyRequest());
+        await Mediator.Send(new RefreshReverseProxyRequest());
         return Ok();
     }
 }
