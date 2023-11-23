@@ -6,16 +6,16 @@ namespace RPWebServer.Controllers;
 [Route("[controller]")]
 public class ComponentsController : Controller
 {
-    private readonly ILogger<ComponentsController> _logger;
-    private readonly IComponentsMappingService _componentsMappingService;
+    public ILogger<ComponentsController> Logger { get; }
+    public IComponentsMappingService ComponentsMappingService { get; }
 
     public ComponentsController(
         ILogger<ComponentsController> logger,
         IComponentsMappingService componentsMappingService
         )
     {
-        _logger = logger;
-        _componentsMappingService = componentsMappingService;
+        Logger = logger;
+        ComponentsMappingService = componentsMappingService;
     }
 
     [HttpGet("{**url}")]
@@ -23,15 +23,15 @@ public class ComponentsController : Controller
     {
         try
         {
-            var provider = _componentsMappingService.GetProviderForUrl(url);
+            var provider = ComponentsMappingService.GetProviderForUrl(url);
 
             if (provider == null)
             {
-                _logger.LogInformation($"no component provider found for url '{url}'");
+                Logger.LogInformation($"no component provider found for url '{url}'");
                 return BadRequest();
             }
 
-            _logger.LogInformation($"component provider found : {provider.Id}");
+            Logger.LogInformation($"component provider found : {provider.Id}");
 
             var result = provider.GetContentForUrl(url);
             if (result.Content == null)
