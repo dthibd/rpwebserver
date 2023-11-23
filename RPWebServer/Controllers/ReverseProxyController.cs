@@ -104,6 +104,11 @@ public class ReverseProxyController : Controller
     {
         var response = await Mediator.Send<GetClusterByIdResponse>(new GetClusterByIdRequest(id));
 
+        if (!response.Succeeded)
+        {
+            return NotFound();
+        }
+        
         return Ok(response.Value);
     }
 
