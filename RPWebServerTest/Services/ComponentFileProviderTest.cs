@@ -1,10 +1,10 @@
 using System.IO.Abstractions;
 using Microsoft.Win32.SafeHandles;
 using Moq;
-using WebComponentServer.Services;
-using WebComponentServerTest.Utilities;
+using RPWebServer.Services;
+using RPWebServerTest.Utilities;
 
-namespace WebComponentServerTest.Services;
+namespace RPWebServerTest.Services;
 
 
 public class ComponentFileProviderTest

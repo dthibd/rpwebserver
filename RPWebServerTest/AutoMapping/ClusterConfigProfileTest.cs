@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Ardalis.SmartEnum;
 using AutoMapper;
-using WebComponentServer.AutoMapping;
-using WebComponentServer.Models.ClusterConfig;
-using WebComponentServer.Services.ReverseProxy.Config.Cluster;
+using RPWebServer.AutoMapping;
+using RPWebServer.Models.ClusterConfig;
+using RPWebServer.Services.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.LoadBalancing;
 
-namespace WebComponentServerTest.AutoMapping
+namespace RPWebServerTest.AutoMapping
 {
     public class ClusterConfigProfileTest
     {

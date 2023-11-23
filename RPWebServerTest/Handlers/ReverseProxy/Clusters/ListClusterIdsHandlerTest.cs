@@ -1,9 +1,9 @@
 using Moq;
-using WebComponentServer.Commands.ReverseProxy.Clusters;
-using WebComponentServer.Handlers.ReverseProxy.Clusters;
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.Commands.ReverseProxy.Clusters;
+using RPWebServer.Handlers.ReverseProxy.Clusters;
+using RPWebServer.Services.ReverseProxy;
 
-namespace WebComponentServerTest.Handlers.ReverseProxy.Clusters;
+namespace RPWebServerTest.Handlers.ReverseProxy.Clusters;
 
 public class ListClusterIdsHandlerTest
 {

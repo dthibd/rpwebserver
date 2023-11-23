@@ -1,9 +1,9 @@
 using Ardalis.GuardClauses;
-using WebComponentServer.Guards;
-using WebComponentServer.Services.ReverseProxy.Config.Route;
+using RPWebServer.Guards;
+using RPWebServer.Services.ReverseProxy.Config.Route;
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServer.Services.ReverseProxy;
+namespace RPWebServer.Services.ReverseProxy;
 
 public class RoutesConfigProvider : IRoutesConfigProvider
 {

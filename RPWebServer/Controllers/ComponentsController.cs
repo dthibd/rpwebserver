@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using WebComponentServer.Services;
+using RPWebServer.Services;
 
-namespace WebComponentServer.Controllers;
+namespace RPWebServer.Controllers;
 
 [Route("[controller]")]
 public class ComponentsController : Controller

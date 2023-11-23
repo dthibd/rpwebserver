@@ -1,7 +1,7 @@
-using WebComponentServer.Services.ReverseProxy.Config.Route;
+using RPWebServer.Services.ReverseProxy.Config.Route;
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServer.Services.ReverseProxy;
+namespace RPWebServer.Services.ReverseProxy;
 
 public interface IRoutesConfigProvider
 {

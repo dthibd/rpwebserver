@@ -1,9 +1,9 @@
 using Moq;
-using WebComponentServer.Commands.ReverseProxy;
-using WebComponentServer.Handlers.ReverseProxy;
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.Commands.ReverseProxy;
+using RPWebServer.Handlers.ReverseProxy;
+using RPWebServer.Services.ReverseProxy;
 
-namespace WebComponentServerTest.Handlers.ReverseProxy;
+namespace RPWebServerTest.Handlers.ReverseProxy;
 
 public class RefreshReverseProxyHandlerTest
 {

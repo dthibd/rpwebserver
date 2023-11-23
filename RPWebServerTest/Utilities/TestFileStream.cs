@@ -1,6 +1,6 @@
 using System.IO.Abstractions;
 
-namespace WebComponentServerTest.Utilities;
+namespace RPWebServerTest.Utilities;
 
 public class TestFileStream : FileSystemStream
 {

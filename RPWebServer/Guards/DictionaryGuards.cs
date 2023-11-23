@@ -1,6 +1,6 @@
 using Ardalis.GuardClauses;
 
-namespace WebComponentServer.Guards;
+namespace RPWebServer.Guards;
 
 public static class DictionaryGuards
 {

@@ -1,9 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using MediatR;
-using WebComponentServer.Commands.Responses;
-using WebComponentServer.Models.ClusterConfig;
+using RPWebServer.Commands.Responses;
+using RPWebServer.Models.ClusterConfig;
 
-namespace WebComponentServer.Commands.ReverseProxy.Clusters;
+namespace RPWebServer.Commands.ReverseProxy.Clusters;
 
 [ExcludeFromCodeCoverage]
 public class UpdateClusterResponse : RequestResponse<ClusterConfigDto>

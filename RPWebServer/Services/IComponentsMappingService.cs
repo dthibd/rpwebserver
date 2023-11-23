@@ -1,6 +1,6 @@
-using WebComponentServer.Core;
+using RPWebServer.Core;
 
-namespace WebComponentServer.Services;
+namespace RPWebServer.Services;
 
 public interface IComponentsMappingService
 {

@@ -2,11 +2,11 @@ using System.IO.Abstractions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-using WebComponentServer.Configuration;
-using WebComponentServer.Core;
-using WebComponentServer.Services;
+using RPWebServer.Configuration;
+using RPWebServer.Core;
+using RPWebServer.Services;
 
-namespace WebComponentServerTest.Services;
+namespace RPWebServerTest.Services;
 
 public class ComponentsMappingServiceTest
 {

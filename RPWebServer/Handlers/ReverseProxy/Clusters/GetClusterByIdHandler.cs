@@ -1,10 +1,10 @@
 using AutoMapper;
 using MediatR;
-using WebComponentServer.Commands.ReverseProxy.Clusters;
-using WebComponentServer.Models.ClusterConfig;
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.Commands.ReverseProxy.Clusters;
+using RPWebServer.Models.ClusterConfig;
+using RPWebServer.Services.ReverseProxy;
 
-namespace WebComponentServer.Handlers.ReverseProxy.Clusters;
+namespace RPWebServer.Handlers.ReverseProxy.Clusters;
 
 public class GetClusterByIdHandler : IRequestHandler<GetClusterByIdRequest, GetClusterByIdResponse>
 {

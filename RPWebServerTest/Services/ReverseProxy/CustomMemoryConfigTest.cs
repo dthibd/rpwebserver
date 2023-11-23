@@ -1,7 +1,7 @@
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.Services.ReverseProxy;
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServerTest.Services.ReverseProxy;
+namespace RPWebServerTest.Services.ReverseProxy;
 
 public class CustomMemoryConfigTest
 {

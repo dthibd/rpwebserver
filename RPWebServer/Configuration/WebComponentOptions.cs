@@ -1,4 +1,4 @@
-namespace WebComponentServer.Configuration;
+namespace RPWebServer.Configuration;
 
 public sealed class WebComponentOptions
 {

@@ -1,9 +1,9 @@
 using Moq;
-using WebComponentServer.Services.ReverseProxy;
-using WebComponentServer.Services.ReverseProxy.Config.Cluster;
+using RPWebServer.Services.ReverseProxy;
+using RPWebServer.Services.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServerTest.Services.ReverseProxy;
+namespace RPWebServerTest.Services.ReverseProxy;
 
 public class ClusterConfigProviderTest
 {

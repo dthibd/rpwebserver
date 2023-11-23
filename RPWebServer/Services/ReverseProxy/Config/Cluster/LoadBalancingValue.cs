@@ -1,7 +1,7 @@
 using Ardalis.SmartEnum;
 using Yarp.ReverseProxy.LoadBalancing;
 
-namespace WebComponentServer.Services.ReverseProxy.Config.Cluster;
+namespace RPWebServer.Services.ReverseProxy.Config.Cluster;
 
 public class LoadBalancingValue : SmartEnum<LoadBalancingValue>
 {

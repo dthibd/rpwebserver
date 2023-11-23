@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServer.Services.ReverseProxy.Config.Route;
+namespace RPWebServer.Services.ReverseProxy.Config.Route;
 
 public class MutableRouteMatch
 {

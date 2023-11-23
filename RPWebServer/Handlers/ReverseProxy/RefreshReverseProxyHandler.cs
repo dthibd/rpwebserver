@@ -1,8 +1,8 @@
 using MediatR;
-using WebComponentServer.Commands.ReverseProxy;
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.Commands.ReverseProxy;
+using RPWebServer.Services.ReverseProxy;
 
-namespace WebComponentServer.Handlers.ReverseProxy;
+namespace RPWebServer.Handlers.ReverseProxy;
 
 public class RefreshReverseProxyHandler : IRequestHandler<RefreshReverseProxyRequest>
 {

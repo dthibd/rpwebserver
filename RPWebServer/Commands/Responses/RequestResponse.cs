@@ -1,4 +1,4 @@
-namespace WebComponentServer.Commands.Responses;
+namespace RPWebServer.Commands.Responses;
 
 public class RequestResponse
 {

@@ -1,9 +1,9 @@
 using System.IO.Abstractions;
 using System.Reflection;
-using WebComponentServer.AutoMapping;
-using WebComponentServer.Configuration;
-using WebComponentServer.Services;
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.AutoMapping;
+using RPWebServer.Configuration;
+using RPWebServer.Services;
+using RPWebServer.Services.ReverseProxy;
 using Yarp.ReverseProxy.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,9 +1,9 @@
 using Ardalis.GuardClauses;
-using WebComponentServer.Guards;
-using WebComponentServer.Services.ReverseProxy.Config.Cluster;
+using RPWebServer.Guards;
+using RPWebServer.Services.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServer.Services.ReverseProxy;
+namespace RPWebServer.Services.ReverseProxy;
 
 
 public class ClustersConfigProvider : IClustersConfigProvider

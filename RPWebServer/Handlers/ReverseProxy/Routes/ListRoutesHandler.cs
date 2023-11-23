@@ -1,10 +1,10 @@
 using AutoMapper;
 using MediatR;
-using WebComponentServer.Commands.ReverseProxy.Routes;
-using WebComponentServer.Models.RouteConfig;
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.Commands.ReverseProxy.Routes;
+using RPWebServer.Models.RouteConfig;
+using RPWebServer.Services.ReverseProxy;
 
-namespace WebComponentServer.Handlers.ReverseProxy.Routes;
+namespace RPWebServer.Handlers.ReverseProxy.Routes;
 
 public class ListRoutesHandler : IRequestHandler<ListRoutesRequest, ListRoutesRequestResponse>
 {

@@ -1,9 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
-using WebComponentServer.Models.ClusterConfig;
-using WebComponentServer.Services.ReverseProxy.Config.Cluster;
+using RPWebServer.Models.ClusterConfig;
+using RPWebServer.Services.ReverseProxy.Config.Cluster;
 
-namespace WebComponentServer.AutoMapping;
+namespace RPWebServer.AutoMapping;
 
 public class ClusterConfigProfile : Profile
 {

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace WebComponentServer.Models.RouteConfig;
+namespace RPWebServer.Models.RouteConfig;
 
 [ExcludeFromCodeCoverage]
 public class RouteConfigDto

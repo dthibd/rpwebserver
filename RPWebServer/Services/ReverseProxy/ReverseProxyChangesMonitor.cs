@@ -1,6 +1,6 @@
 using System.Reactive.Subjects;
 
-namespace WebComponentServer.Services.ReverseProxy;
+namespace RPWebServer.Services.ReverseProxy;
 
 public class ReverseProxyChangesMonitor : IReverseProxyChangesMonitor
 {

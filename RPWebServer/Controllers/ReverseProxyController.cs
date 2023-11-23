@@ -1,13 +1,13 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebComponentServer.Commands.Responses;
-using WebComponentServer.Commands.ReverseProxy;
-using WebComponentServer.Commands.ReverseProxy.Clusters;
-using WebComponentServer.Commands.ReverseProxy.Routes;
-using WebComponentServer.Models.ClusterConfig;
-using WebComponentServer.Models.RouteConfig;
+using RPWebServer.Commands.Responses;
+using RPWebServer.Commands.ReverseProxy;
+using RPWebServer.Commands.ReverseProxy.Clusters;
+using RPWebServer.Commands.ReverseProxy.Routes;
+using RPWebServer.Models.ClusterConfig;
+using RPWebServer.Models.RouteConfig;
 
-namespace WebComponentServer.Controllers;
+namespace RPWebServer.Controllers;
 
 [Route("[controller]")]
 public class ReverseProxyController : Controller

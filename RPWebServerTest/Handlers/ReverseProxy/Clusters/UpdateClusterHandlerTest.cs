@@ -1,12 +1,12 @@
 using AutoMapper;
 using Moq;
-using WebComponentServer.Commands.ReverseProxy.Clusters;
-using WebComponentServer.Handlers.ReverseProxy.Clusters;
-using WebComponentServer.Models.ClusterConfig;
-using WebComponentServer.Services.ReverseProxy;
-using WebComponentServer.Services.ReverseProxy.Config.Cluster;
+using RPWebServer.Commands.ReverseProxy.Clusters;
+using RPWebServer.Handlers.ReverseProxy.Clusters;
+using RPWebServer.Models.ClusterConfig;
+using RPWebServer.Services.ReverseProxy;
+using RPWebServer.Services.ReverseProxy.Config.Cluster;
 
-namespace WebComponentServerTest.Handlers.ReverseProxy.Clusters;
+namespace RPWebServerTest.Handlers.ReverseProxy.Clusters;
 
 public class UpdateClusterHandlerTest
 {

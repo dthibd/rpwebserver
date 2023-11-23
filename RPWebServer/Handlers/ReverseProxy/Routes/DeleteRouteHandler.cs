@@ -1,9 +1,9 @@
 using MediatR;
-using WebComponentServer.Commands.Responses;
-using WebComponentServer.Commands.ReverseProxy.Routes;
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.Commands.Responses;
+using RPWebServer.Commands.ReverseProxy.Routes;
+using RPWebServer.Services.ReverseProxy;
 
-namespace WebComponentServer.Handlers.ReverseProxy.Routes;
+namespace RPWebServer.Handlers.ReverseProxy.Routes;
 
 public class DeleteRouteHandler : IRequestHandler<DeleteRouteRequest, RequestResponse>
 {

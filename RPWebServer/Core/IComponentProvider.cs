@@ -1,4 +1,4 @@
-namespace WebComponentServer.Core;
+namespace RPWebServer.Core;
 
 public struct ProviderContentResult
 {

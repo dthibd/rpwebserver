@@ -1,6 +1,6 @@
-using WebComponentServer.Services.ReverseProxy.Config.Route;
+using RPWebServer.Services.ReverseProxy.Config.Route;
 
-namespace WebComponentServerTest.Services.ReverseProxy.Config.Route;
+namespace RPWebServerTest.Services.ReverseProxy.Config.Route;
 
 public class MutableRouteConfigTest
 {

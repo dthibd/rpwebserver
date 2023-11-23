@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebComponentServer.Controllers
+namespace RPWebServer.Controllers
 {
     [Route("[controller]")]
     public class TestController : Controller

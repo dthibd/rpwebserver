@@ -1,9 +1,9 @@
 using System.IO.Abstractions;
 using Microsoft.Extensions.Options;
-using WebComponentServer.Configuration;
-using WebComponentServer.Core;
+using RPWebServer.Configuration;
+using RPWebServer.Core;
 
-namespace WebComponentServer.Services;
+namespace RPWebServer.Services;
 
 
 public class ComponentsMappingService : IComponentsMappingService

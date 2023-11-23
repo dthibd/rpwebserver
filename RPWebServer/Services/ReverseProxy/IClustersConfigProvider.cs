@@ -1,7 +1,7 @@
-using WebComponentServer.Services.ReverseProxy.Config.Cluster;
+using RPWebServer.Services.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServer.Services.ReverseProxy;
+namespace RPWebServer.Services.ReverseProxy;
 
 public interface IClustersConfigProvider
 {

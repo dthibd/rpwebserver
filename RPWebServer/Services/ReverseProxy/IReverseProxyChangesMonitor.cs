@@ -1,4 +1,4 @@
-namespace WebComponentServer.Services.ReverseProxy;
+namespace RPWebServer.Services.ReverseProxy;
 
 public interface IReverseProxyChangesMonitor
 {

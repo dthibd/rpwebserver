@@ -1,6 +1,6 @@
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServer.Services.ReverseProxy.Config.Cluster;
+namespace RPWebServer.Services.ReverseProxy.Config.Cluster;
 
 public class MutableDestinationConfig
 {

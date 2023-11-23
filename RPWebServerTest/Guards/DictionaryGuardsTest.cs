@@ -1,7 +1,7 @@
 using Ardalis.GuardClauses;
-using WebComponentServer.Guards;
+using RPWebServer.Guards;
 
-namespace WebComponentServerTest.Guards
+namespace RPWebServerTest.Guards
 {
     public class DictionaryGuardsTest
     {

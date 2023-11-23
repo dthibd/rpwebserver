@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace WebComponentServer.Models.ClusterConfig;
+namespace RPWebServer.Models.ClusterConfig;
 
 [ExcludeFromCodeCoverage]
 public class DestinationConfigDto

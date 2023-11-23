@@ -1,6 +1,6 @@
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServer.Services.ReverseProxy;
+namespace RPWebServer.Services.ReverseProxy;
 
 public class CustomMemoryConfigFactory : ICustomMemoryConfigFactory
 {

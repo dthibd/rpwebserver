@@ -1,7 +1,7 @@
 using System.IO.Abstractions;
-using WebComponentServer.Core;
+using RPWebServer.Core;
 
-namespace WebComponentServer.Services;
+namespace RPWebServer.Services;
 
 public class ComponentProviderFactory : IComponentProviderFactory
 {

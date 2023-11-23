@@ -1,7 +1,7 @@
 using Moq;
-using WebComponentServer.Services.ReverseProxy;
+using RPWebServer.Services.ReverseProxy;
 
-namespace WebComponentServerTest.Services.ReverseProxy;
+namespace RPWebServerTest.Services.ReverseProxy;
 
 public class MonitorListener
 {

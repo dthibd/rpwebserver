@@ -1,9 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using MediatR;
-using WebComponentServer.Commands.Responses;
-using WebComponentServer.Models.RouteConfig;
+using RPWebServer.Commands.Responses;
+using RPWebServer.Models.RouteConfig;
 
-namespace WebComponentServer.Commands.ReverseProxy.Routes;
+namespace RPWebServer.Commands.ReverseProxy.Routes;
 
 [ExcludeFromCodeCoverage]
 public class ListRoutesRequestResponse : RequestResponse<IEnumerable<RouteConfigDto>>

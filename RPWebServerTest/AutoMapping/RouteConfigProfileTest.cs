@@ -1,9 +1,9 @@
 using AutoMapper;
-using WebComponentServer.AutoMapping;
-using WebComponentServer.Models.RouteConfig;
-using WebComponentServer.Services.ReverseProxy.Config.Route;
+using RPWebServer.AutoMapping;
+using RPWebServer.Models.RouteConfig;
+using RPWebServer.Services.ReverseProxy.Config.Route;
 
-namespace WebComponentServerTest.AutoMapping;
+namespace RPWebServerTest.AutoMapping;
 
 public class RouteConfigProfileTest
 {

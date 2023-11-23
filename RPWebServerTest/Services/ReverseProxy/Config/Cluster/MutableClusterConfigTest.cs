@@ -1,6 +1,6 @@
-using WebComponentServer.Services.ReverseProxy.Config.Cluster;
+using RPWebServer.Services.ReverseProxy.Config.Cluster;
 
-namespace WebComponentServerTest.Services.ReverseProxy.Config.Cluster;
+namespace RPWebServerTest.Services.ReverseProxy.Config.Cluster;
 
 public class MutableClusterConfigTest
 {

@@ -1,11 +1,11 @@
 using System.Reactive.Subjects;
 using Moq;
-using WebComponentServer.Services.ReverseProxy;
-using WebComponentServer.Services.ReverseProxy.Config.Cluster;
-using WebComponentServer.Services.ReverseProxy.Config.Route;
+using RPWebServer.Services.ReverseProxy;
+using RPWebServer.Services.ReverseProxy.Config.Cluster;
+using RPWebServer.Services.ReverseProxy.Config.Route;
 using Yarp.ReverseProxy.Configuration;
 
-namespace WebComponentServerTest.Services.ReverseProxy;
+namespace RPWebServerTest.Services.ReverseProxy;
 
 public class CustomProxyConfigProviderTest
 {

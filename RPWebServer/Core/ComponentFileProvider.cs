@@ -1,9 +1,8 @@
 using System.IO.Abstractions;
-using System.Text;
 using System.Text.RegularExpressions;
 using MimeTypes;
 
-namespace WebComponentServer.Core;
+namespace RPWebServer.Core;
 
 public class ComponentFileProvider : IComponentProvider
 {

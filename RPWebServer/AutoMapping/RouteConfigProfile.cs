@@ -1,8 +1,8 @@
 using AutoMapper;
-using WebComponentServer.Models.RouteConfig;
-using WebComponentServer.Services.ReverseProxy.Config.Route;
+using RPWebServer.Models.RouteConfig;
+using RPWebServer.Services.ReverseProxy.Config.Route;
 
-namespace WebComponentServer.AutoMapping;
+namespace RPWebServer.AutoMapping;
 
 
 public class RouteConfigProfile : Profile
