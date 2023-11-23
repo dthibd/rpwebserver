@@ -4,8 +4,8 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <AssemblyName>WebComponentServer</AssemblyName>
-        <RootNamespace>WebComponentServer</RootNamespace>
+        <AssemblyName>RPWebServer</AssemblyName>
+        <RootNamespace>RPWebServer</RootNamespace>
         <WarningsAsErrors>Nullable</WarningsAsErrors>
     </PropertyGroup>
 

@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebComponentServer", "WebComponentServer\WebComponentServer.csproj", "{7B6A8BED-6E6E-491E-92D3-30A1E61E79B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPWebServer", "RPWebServer\RPWebServer.csproj", "{7B6A8BED-6E6E-491E-92D3-30A1E61E79B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebComponentServerTest", "WebComponentServerTest\WebComponentServerTest.csproj", "{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPWebServerTest", "RPWebServerTest\RPWebServerTest.csproj", "{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

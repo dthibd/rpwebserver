@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/WebServer/bin/Debug/net7.0/WebServer.dll",
+            "program": "${workspaceFolder}/WebComponentServer/bin/Debug/net7.0/WebComponentServer.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/WebServer",
+            "cwd": "${workspaceFolder}/WebComponentServer",
             "stopAtEntry": false,
             // "serverReadyAction": {
             //     "action": "openExternally",

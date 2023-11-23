@@ -15,7 +15,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/WebServer.sln",
+                "${workspaceFolder}/WebComponentServer.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
