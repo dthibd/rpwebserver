@@ -1,6 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using CommandLine;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using RPWebSvrCli.Services;
 
 namespace RPWebSvrCli;
 
@@ -11,6 +14,8 @@ public class Startup
     public StringWriter HelpWriter { get; } = new();
 
     public IServiceProvider ServiceProvider { get; set; }
+    
+    public IHost App { get; set; }
 
     public string[] Args { get; }
 
@@ -25,11 +30,18 @@ public class Startup
             c.AutoHelp = true;
             c.HelpWriter = HelpWriter;
         });
+
     }
 
     public void Init()
     {
-        InitServices();
+        var builder = Host.CreateApplicationBuilder(Args);
+
+        builder.Services.AddSingleton<IWorker, Worker>();
+        
+        builder.Logging.AddConsole();
+        
+        App = builder.Build();
     }
 
     public void Run()
@@ -37,6 +49,9 @@ public class Startup
         Parser.ParseArguments<CommandLineOptions>(Args)
             .WithParsed(c =>
             {
+                IWorker? worker = App.Services.GetService<IWorker>();
+
+                worker?.HandleCommandLineOptions(c);
             })
             .WithNotParsed(errors =>
             {
@@ -51,12 +66,5 @@ public class Startup
         {
             Console.WriteLine(helpText);
         }
-    }
-
-    private void InitServices()
-    {
-        var services = new ServiceCollection();
-
-        ServiceProvider = services.BuildServiceProvider();
     }
 }
