@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPWebServer", "RPWebServer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPWebServerTest", "RPWebServerTest\RPWebServerTest.csproj", "{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPWebSvrCli", "RPWebSvrCli\RPWebSvrCli.csproj", "{704172F0-68E6-4E6C-AB81-7FEEA0400256}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A39C9831-C696-4BF3-BA4A-1E5F98FC685E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{704172F0-68E6-4E6C-AB81-7FEEA0400256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704172F0-68E6-4E6C-AB81-7FEEA0400256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704172F0-68E6-4E6C-AB81-7FEEA0400256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704172F0-68E6-4E6C-AB81-7FEEA0400256}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
