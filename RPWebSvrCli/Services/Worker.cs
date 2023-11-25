@@ -4,18 +4,24 @@ namespace RPWebSvrCli.Services;
 
 public class Worker : IWorker
 {
-    public ILogger<IWorker> Logger { get; }    
+    public ILogger<IWorker> Logger { get; }
     
-    public Worker(ILogger<IWorker> logger)
+    public ITextOutput TextOutput { get; }
+    
+    public Worker(
+        ILogger<IWorker> logger,
+        ITextOutput textOutput
+        )
     {
         Logger = logger;
+        TextOutput = textOutput;
     }
 
     public void HandleCommandLineOptions(CommandLineOptions options)
     {
         if (options.ToolVersion)
         {
-            Console.WriteLine("Tool Version : 0.0.1");
+            TextOutput.WriteLine("Tool version: 0.0.1");
         }
     }
 }

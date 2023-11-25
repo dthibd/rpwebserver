@@ -37,8 +37,10 @@ public class Startup
     {
         var builder = Host.CreateApplicationBuilder(Args);
 
-        builder.Services.AddSingleton<IWorker, Worker>();
-        
+        builder.Services
+            .AddSingleton<IWorker, Worker>()
+            .AddSingleton<ITextOutput, ConsoleTextOutput>();
+                
         builder.Logging.AddConsole();
         
         App = builder.Build();
