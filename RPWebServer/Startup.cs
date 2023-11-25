@@ -4,6 +4,7 @@ using System.Reflection;
 using RPWebServer.AutoMapping;
 using RPWebServer.Configuration;
 using RPWebServer.Services;
+using RPWebServer.Services.GRPC;
 using RPWebServer.Services.ReverseProxy;
 using Yarp.ReverseProxy.Configuration;
 
@@ -43,6 +44,8 @@ public class Startup
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         Builder.Services.AddEndpointsApiExplorer();
         Builder.Services.AddSwaggerGen();
+        Builder.Services.AddGrpc();
+        Builder.Services.AddGrpcReflection();
         Builder.Services
             .AddSingleton<ICustomMemoryConfigFactory, CustomMemoryConfigFactory>()
             .AddSingleton<IComponentProviderFactory, ComponentProviderFactory>()
@@ -78,6 +81,7 @@ public class Startup
         {
             App.UseSwagger();
             App.UseSwaggerUI();
+            App.MapGrpcReflectionService();
         }
 
         App.UseHttpsRedirection();
@@ -86,6 +90,8 @@ public class Startup
         App.UseCors();
 
         App.MapControllers();
+        
+        App.MapGrpcService<GetToolVersionService>();
     }
 
     private void UpdateComponentsMapping()

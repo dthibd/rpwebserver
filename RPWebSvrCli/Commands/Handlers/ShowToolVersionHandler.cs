@@ -1,3 +1,4 @@
+using Grpc.Net.Client;
 using MediatR;
 using RPWebSvrCli.Commands.Requests;
 using RPWebSvrCli.Services;
@@ -13,10 +14,17 @@ public class ShowToolVersionHandler : IRequestHandler<ShowToolVersionRequest>
         TextOutput = textOutput;
     }
     
-    public Task Handle(ShowToolVersionRequest request, CancellationToken cancellationToken)
+    public async Task Handle(ShowToolVersionRequest request, CancellationToken cancellationToken)
     {
+        var channel = GrpcChannel.ForAddress("http://localhost:8100");
+        var client = new GetToolVersion.GetToolVersionClient(channel);
+
+        var response = await client.GetToolVersionAsync(
+            new GetToolVersionRequest());
+
+        TextOutput.WriteLine(response.Version);
         TextOutput.WriteLine("Tool version: 0.0.1");
 
-        return Task.CompletedTask;
+        // return Task.CompletedTask;
     }
 }

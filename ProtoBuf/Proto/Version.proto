@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+
+service GetToolVersion {
+    rpc GetToolVersion(GetToolVersionRequest) returns (GetToolVersionResponse);
+}
+
+message GetToolVersionRequest {
+}
+
+message GetToolVersionResponse {
+    string version = 1;
+}
+
