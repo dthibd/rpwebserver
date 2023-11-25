@@ -39,7 +39,9 @@ public class Startup
 
         builder.Services
             .AddSingleton<IWorker, Worker>()
-            .AddSingleton<ITextOutput, ConsoleTextOutput>();
+            .AddSingleton<ITextOutput, ConsoleTextOutput>()
+            .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
+
                 
         builder.Logging.AddConsole();
         

@@ -1,4 +1,6 @@
+using MediatR;
 using Microsoft.Extensions.Logging;
+using RPWebSvrCli.Commands.Requests;
 
 namespace RPWebSvrCli.Services;
 
@@ -8,20 +10,24 @@ public class Worker : IWorker
     
     public ITextOutput TextOutput { get; }
     
+    public IMediator Mediator { get; }
+    
     public Worker(
         ILogger<IWorker> logger,
-        ITextOutput textOutput
+        ITextOutput textOutput,
+        IMediator mediator
         )
     {
         Logger = logger;
         TextOutput = textOutput;
+        Mediator = mediator;
     }
 
     public void HandleCommandLineOptions(CommandLineOptions options)
     {
         if (options.ToolVersion)
         {
-            TextOutput.WriteLine("Tool version: 0.0.1");
+            Mediator.Send(new ShowToolVersionRequest());
         }
     }
 }

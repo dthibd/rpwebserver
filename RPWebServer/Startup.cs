@@ -38,7 +38,7 @@ public class Startup
     {
         Builder.Services.AddTransient<IFileSystem, FileSystem>();
         Builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(RouteConfigProfile)));
-        Builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RouteConfigProfile).Assembly));
+        Builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
         Builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         Builder.Services.AddEndpointsApiExplorer();
