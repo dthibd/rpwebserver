@@ -1,12 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using System.Reflection;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.AspNetCore.Server.Kestrel.Https;
 using RPWebServer.AutoMapping;
 using RPWebServer.Configuration;
 using RPWebServer.Services;
-using RPWebServer.Services.GRPC;
 using RPWebServer.Services.ReverseProxy;
 using Yarp.ReverseProxy.Configuration;
 
@@ -43,11 +40,8 @@ public class Startup
         Builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(RouteConfigProfile)));
         Builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
         Builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         Builder.Services.AddEndpointsApiExplorer();
         Builder.Services.AddSwaggerGen();
-        Builder.Services.AddGrpc();
-        Builder.Services.AddGrpcReflection();
         Builder.Services
             .AddSingleton<ICustomMemoryConfigFactory, CustomMemoryConfigFactory>()
             .AddSingleton<IComponentProviderFactory, ComponentProviderFactory>()
@@ -87,14 +81,6 @@ public class Startup
 
         App.UseRouting();
         
-        // App.UseGrpcWeb(new GrpcWebOptions() {DefaultEnabled = true });
-        // App.UseEndpoints(endpoints =>
-        // {
-        //     endpoints.MapGrpcService<GetToolVersionService>()
-        //         .EnableGrpcWeb()
-        //         .RequireCors("AllowAll");
-        // });
-        
         App.MapReverseProxy();
 
         // Configure the HTTP request pipeline.
@@ -102,7 +88,6 @@ public class Startup
         {
             App.UseSwagger();
             App.UseSwaggerUI();
-            App.MapGrpcReflectionService();
         }
 
         App.UseHttpsRedirection();
@@ -111,9 +96,6 @@ public class Startup
         App.UseCors();
 
         App.MapControllers();
-
-        App.MapGrpcService<GetToolVersionService>();
-
     }
 
     private void UpdateComponentsMapping()

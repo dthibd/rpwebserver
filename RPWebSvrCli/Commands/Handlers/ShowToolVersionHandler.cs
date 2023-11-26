@@ -1,8 +1,4 @@
-using Google.Protobuf.WellKnownTypes;
-using Grpc.Core;
-using Grpc.Net.Client;
 using MediatR;
-using RPWebServerProto;
 using RPWebSvrCli.Commands.Requests;
 using RPWebSvrCli.Services;
 
@@ -17,16 +13,10 @@ public class ShowToolVersionHandler : IRequestHandler<ShowToolVersionRequest>
         TextOutput = textOutput;
     }
     
-    public async Task Handle(ShowToolVersionRequest request, CancellationToken cancellationToken)
+    public Task Handle(ShowToolVersionRequest request, CancellationToken cancellationToken)
     {
         try
         {
-            var channel = GrpcChannel.ForAddress("https://127.0.0.1:8101");
-            var client = new GetToolVersion.GetToolVersionClient(channel);
-            
-            var response = await client.GetToolVersionAsync(new Empty());
-            
-            TextOutput.WriteLine(response.Version);
             TextOutput.WriteLine("Tool version: 0.0.1");
         }
         catch (Exception e)
@@ -35,7 +25,7 @@ public class ShowToolVersionHandler : IRequestHandler<ShowToolVersionRequest>
             throw;
         }
 
-        // return Task.CompletedTask;
+        return Task.CompletedTask;
     }
 }
 
