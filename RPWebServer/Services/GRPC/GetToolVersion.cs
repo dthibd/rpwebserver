@@ -1,4 +1,6 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using RPWebServerProto;
 
 namespace RPWebServer.Services.GRPC;
 
@@ -12,8 +14,8 @@ public class GetToolVersionService : GetToolVersion.GetToolVersionBase
     {
         Logger = logger;
     }
-    
-    public override Task<GetToolVersionResponse> GetToolVersion(GetToolVersionRequest request, ServerCallContext context)
+
+    public override Task<GetToolVersionResponse> GetToolVersion(Empty request, ServerCallContext context)
     {
         Logger.LogInformation("GetToolVersion called");
         return Task.FromResult(new GetToolVersionResponse

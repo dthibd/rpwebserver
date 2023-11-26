@@ -41,7 +41,7 @@ public class Startup
             .AddSingleton<IWorker, Worker>()
             .AddSingleton<ITextOutput, ConsoleTextOutput>()
             .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
-
+        
                 
         builder.Logging.AddConsole();
         

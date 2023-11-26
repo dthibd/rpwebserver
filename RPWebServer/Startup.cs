@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Abstractions;
 using System.Reflection;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Server.Kestrel.Https;
 using RPWebServer.AutoMapping;
 using RPWebServer.Configuration;
 using RPWebServer.Services;
@@ -56,11 +58,20 @@ public class Startup
             .AddSingleton<IProxyConfigProvider, CustomProxyConfigProvider>()
             .AddReverseProxy();
 
+        Builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+        }));
+        
         Builder.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(policy =>
             {
                 policy.WithOrigins("*");
+                policy.WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
             });
         });
 
@@ -74,6 +85,16 @@ public class Startup
     {
         App = Builder.Build();
 
+        App.UseRouting();
+        
+        // App.UseGrpcWeb(new GrpcWebOptions() {DefaultEnabled = true });
+        // App.UseEndpoints(endpoints =>
+        // {
+        //     endpoints.MapGrpcService<GetToolVersionService>()
+        //         .EnableGrpcWeb()
+        //         .RequireCors("AllowAll");
+        // });
+        
         App.MapReverseProxy();
 
         // Configure the HTTP request pipeline.
@@ -90,8 +111,9 @@ public class Startup
         App.UseCors();
 
         App.MapControllers();
-        
+
         App.MapGrpcService<GetToolVersionService>();
+
     }
 
     private void UpdateComponentsMapping()

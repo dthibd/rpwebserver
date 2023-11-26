@@ -1,11 +1,13 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "RPWebServerProto";
+
+package RPWebServerProto;
 
 service GetToolVersion {
-    rpc GetToolVersion(GetToolVersionRequest) returns (GetToolVersionResponse);
-}
-
-message GetToolVersionRequest {
+    rpc GetToolVersion(google.protobuf.Empty) returns (GetToolVersionResponse);
 }
 
 message GetToolVersionResponse {
