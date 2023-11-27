@@ -27,7 +27,22 @@ public class Worker : IWorker
     {
         if (options.ToolVersion)
         {
-            Mediator.Send(new ShowToolVersionRequest());
+            OnToolVersion();   
         }
+
+        if (options.Init)
+        {
+            OnInit();
+        }
+    }
+
+    public void OnToolVersion()
+    {
+        Mediator.Send(new ShowToolVersionRequest());
+    }
+
+    public void OnInit()
+    {
+        Mediator.Send(new InitRequest(Directory.GetCurrentDirectory()));
     }
 }
