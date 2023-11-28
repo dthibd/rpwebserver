@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.IO.Abstractions;
 using CommandLine;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,10 +42,12 @@ public class Startup
         builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true);
         
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
+        
         builder.Services
+            .AddTransient<IFileSystem, FileSystem>()
             .AddSingleton<IWorker, Worker>()
-            .AddSingleton<ITextOutput, ConsoleTextOutput>()
-            .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
+            .AddSingleton<ITextOutput, ConsoleTextOutput>();
                 
         builder.Logging.AddConsole();
         
