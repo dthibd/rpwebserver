@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RPWebSvrCli.Config;
 using RPWebSvrCli.Services;
 
 namespace RPWebSvrCli;
@@ -43,11 +44,14 @@ public class Startup
         builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true);
         
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
-        
+
         builder.Services
             .AddTransient<IFileSystem, FileSystem>()
             .AddSingleton<IWorker, Worker>()
             .AddSingleton<ITextOutput, ConsoleTextOutput>();
+
+        builder.Services
+            .Configure<Settings>(builder.Configuration);
                 
         builder.Logging.AddConsole();
         
