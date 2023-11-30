@@ -5,13 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": "RPWebServer debug",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/WebComponentServer/bin/Debug/net7.0/WebComponentServer.dll",
+            "program": "${workspaceFolder}/RPWebServer/bin/Debug/net8.0/RPWebServer.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/WebComponentServer",
+            "cwd": "${workspaceFolder}/RPWebServer",
             "stopAtEntry": false,
             // "serverReadyAction": {
             //     "action": "openExternally",
@@ -24,10 +24,5 @@
                 "/Views": "${workspaceFolder}/Views"
             }
         },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach"
-        }
     ]
 }
