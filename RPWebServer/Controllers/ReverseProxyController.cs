@@ -44,8 +44,13 @@ public class ReverseProxyController : Controller
     }
 
     [HttpPost("Route")]
-    public async Task<IActionResult> AddRoute([FromBody] RouteConfigDto routeConfigDto)
+    public async Task<IActionResult> AddRoute([FromBody] RouteConfigDto? routeConfigDto)
     {
+        if (routeConfigDto == null)
+        {
+            return BadRequest();
+        }
+
         var response = await Mediator.Send<AddRouteResponse>(new AddRouteRequest(routeConfigDto));
 
         if (!response.Succeeded)

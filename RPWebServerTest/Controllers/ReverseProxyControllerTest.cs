@@ -108,6 +108,16 @@ public class ReverseProxyControllerTest
     }
 
     [Fact]
+    public async void AddRouteWithNullDto()
+    {
+        var controller = new ReverseProxyController(MediatorMock.Object);
+        var result = await controller.AddRoute(null);
+
+        Assert.NotNull(result);
+        Assert.IsType<BadRequestResult>(result);
+    }
+
+    [Fact]
     public async void AddRouteFailure()
     {
         var controller = new ReverseProxyController(MediatorMock.Object);
