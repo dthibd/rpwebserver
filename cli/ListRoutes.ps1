@@ -1,7 +1,7 @@
 Param(
-    [Parameter()]
+    [Parameter(Mandatory)]
     [string]
-    $ServerUrl = "https://localhost:8101"
+    $ServerUrl
 )
 
 begin {
@@ -12,8 +12,4 @@ process {
     $Routes = Invoke-RestMethod -Uri $ApiRoute -Method Get
 
     $Routes
-}
-
-end {
-
 }
