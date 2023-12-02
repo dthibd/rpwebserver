@@ -62,8 +62,13 @@ public class ReverseProxyController : Controller
     }
 
     [HttpPut("Route")]
-    public async Task<IActionResult> UpdateRoute([FromBody] RouteConfigDto routeConfigDto)
+    public async Task<IActionResult> UpdateRoute([FromBody] RouteConfigDto? routeConfigDto)
     {
+        if (routeConfigDto == null)
+        {
+            return BadRequest();
+        }
+        
         var result = await Mediator.Send<RequestResponse>(new UpdateRouteRequest(routeConfigDto));
 
         if (!result.Succeeded)
