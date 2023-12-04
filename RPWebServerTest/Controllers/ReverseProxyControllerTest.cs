@@ -377,6 +377,16 @@ public class ReverseProxyControllerTest
     }
 
     [Fact]
+    public async void UpdateClusterNullDto()
+    {
+        var controller = new ReverseProxyController(MediatorMock.Object);
+        var result = await controller.UpdateCluster(null);
+
+        Assert.NotNull(result);
+        Assert.IsType<BadRequestResult>(result);
+    }
+
+    [Fact]
     public async void Refresh()
     {
         var controller = new ReverseProxyController(MediatorMock.Object);

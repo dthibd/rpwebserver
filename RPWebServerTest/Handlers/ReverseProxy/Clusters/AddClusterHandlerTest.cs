@@ -70,4 +70,23 @@ public class AddClusterHandlerTest
         Assert.NotNull(response);
         Assert.False(response.Succeeded);
     }
+
+    [Fact]
+    public async void HandleInvalidMapping()
+    {
+        MapperMock
+            .Setup(m => m.Map<MutableClusterConfig>(ClusterDto))
+            .Throws(new AutoMapperMappingException("Invalid mapping"));
+
+        var handler = new AddClusterHandler(
+            ClustersConfigProviderMock.Object,
+            MapperMock.Object);
+
+        var request = new AddClusterRequest(ClusterDto);
+
+        var response = await handler.Handle(request, CancellationToken.None);
+
+        Assert.NotNull(response);
+        Assert.False(response.Succeeded);
+    }
 }
