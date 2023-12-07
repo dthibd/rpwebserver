@@ -108,6 +108,16 @@ public class ReverseProxyControllerTest
     }
 
     [Fact]
+    public async void AddRouteWithNullDto()
+    {
+        var controller = new ReverseProxyController(MediatorMock.Object);
+        var result = await controller.AddRoute(null);
+
+        Assert.NotNull(result);
+        Assert.IsType<BadRequestResult>(result);
+    }
+
+    [Fact]
     public async void AddRouteFailure()
     {
         var controller = new ReverseProxyController(MediatorMock.Object);
@@ -147,6 +157,16 @@ public class ReverseProxyControllerTest
         Assert.IsType<OkObjectResult>(result);
     }
 
+    [Fact]
+    public async void UpdateRouteWithNullDto()
+    {
+        var controller = new ReverseProxyController(MediatorMock.Object);
+        var result = await controller.UpdateRoute(null);
+
+        Assert.NotNull(result);
+        Assert.IsType<BadRequestResult>(result);
+    }
+    
     [Fact]
     public async void UpdateRouteFailure()
     {
@@ -354,6 +374,16 @@ public class ReverseProxyControllerTest
 
         Assert.NotNull(result);
         Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    [Fact]
+    public async void UpdateClusterNullDto()
+    {
+        var controller = new ReverseProxyController(MediatorMock.Object);
+        var result = await controller.UpdateCluster(null);
+
+        Assert.NotNull(result);
+        Assert.IsType<BadRequestResult>(result);
     }
 
     [Fact]

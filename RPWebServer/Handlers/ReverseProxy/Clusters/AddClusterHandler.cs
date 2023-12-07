@@ -31,5 +31,9 @@ public class AddClusterHandler : IRequestHandler<AddClusterRequest, AddClusterRe
         {
             return new AddClusterResponse(false, ex.Message);
         }
+        catch (AutoMapperMappingException ex)
+        {
+            return new AddClusterResponse(false, ex.Message);
+        }
     }
 }
